@@ -3,7 +3,7 @@ require 'data_mapper'
 
 
 DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, "postgres://#{ENV['PCWILEYDB_USERNAME']}:#{ENV['PCWILEYDB_PASSWORD']}@#{ENV['PCWILEYDB_HOSTNAME']}/#{ENV['PCWILEYDB_DATABASE']}")
+DataMapper.setup(:default, "#{ENV['DATABASE_URL']}")
 
 class Post
   include DataMapper::Resource
