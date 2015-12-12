@@ -46,7 +46,7 @@ $( document ).ready(function() {
     }
   }
 
-  var a = new SampleSound( 'http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409276tin.wav' );
+  var a = new SampleSound( '//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409276tin.wav' );
   
   //a.play();
   a.print();
