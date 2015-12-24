@@ -62,7 +62,7 @@ $( document ).ready(function() {
   // OSC CONFIG
   // ----------
 
-  function Oscillator( object, amplitude, waveform, frequency, attackTime, releaseTime ) {
+  function Oscillator( object, amplitude, pan, waveform, frequency, attackTime, releaseTime ) {
     object.type = waveform;
     object.amplitude = amplitude;
     object.frequency.value = frequency;
@@ -73,8 +73,7 @@ $( document ).ready(function() {
     object.gain.gain.value = 0;
 
     object.pan = context.createStereoPanner();
-    object.pan.pan.value = 0.6; // PANNING!!
-    console.log(object.pan);
+    object.pan.pan.value = pan;
     
     object.pan.connect(object.gain);
     object.connect(object.pan);
@@ -99,22 +98,20 @@ $( document ).ready(function() {
   p2 = context.createOscillator();
   p3 = context.createOscillator();
   p4 = context.createOscillator();
-  p5 = context.createOscillator();
-  p6 = context.createOscillator();
 
-  Oscillator( p1, 1, 'sine', rootPitch, 0.125, 0.3 );
-  Oscillator( p2, 1, 'sine', rootPitch*pitchRatio[2], 0.125, 0.3 );
-  Oscillator( p3, 1, 'sine', rootPitch*pitchRatio[4], 0.125, 0.3 );
-  Oscillator( p4, 1, 'sine', rootPitch*pitchRatio[6], 0.125, 0.3 );
+  Oscillator( p1, 1, 0.2, 'sine', rootPitch, 0.125, 0.3 );
+  Oscillator( p2, 0.8, 0.4, 'sine', rootPitch*pitchRatio[2], 0.125, 0.3 );
+  Oscillator( p3, 0.6, 1.6, 'sine', rootPitch*pitchRatio[4], 0.125, 0.3 );
+  Oscillator( p4, 0.4, 1.8, 'sine', rootPitch*pitchRatio[6], 0.125, 0.3 );
 
 
-  //p1.gain.connect( c );
+  p1.gain.connect( c );
   p1.gain.connect( context.destination );
-  //p2.gain.connect( c );
+  p2.gain.connect( c );
   p2.gain.connect( context.destination );
-  //p3.gain.connect( c );
+  p3.gain.connect( c );
   p3.gain.connect( context.destination );
-  //p4.gain.connect( c );
+  p4.gain.connect( c );
   p4.gain.connect( context.destination );
 
 
@@ -138,6 +135,7 @@ $( document ).ready(function() {
       p2.trigger();
       p3.trigger();
       p4.trigger();
+      //p4.pan.pan.value -= 0.1; yes you can change panning like this
     }
   });
 
