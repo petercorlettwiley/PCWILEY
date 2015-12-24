@@ -59,40 +59,73 @@ $( document ).ready(function() {
   a.gain.connect( c );
   a.gain.connect( context.destination );
 
-  // OSC
-  // ===
+  // OSC CONFIG
+  // ----------
 
-  function Oscillator( object, frequency, attackTime, releaseTime ) {
-    object.type = 'sine';
+  function Oscillator( object, amplitude, waveform, frequency, attackTime, releaseTime ) {
+    object.type = waveform;
+    object.amplitude = amplitude;
     object.frequency.value = frequency;
-  
     object.attackTime = attackTime;
     object.releaseTime = releaseTime;
   
     object.gain = context.createGain();
     object.gain.gain.value = 0;
-  
-    object.connect(object.gain);
-    object.gain.connect(c);
-    object.gain.connect(context.destination);
+
+    object.pan = context.createStereoPanner();
+    object.pan.pan.value = 0.6; // PANNING!!
+    console.log(object.pan);
+    
+    object.pan.connect(object.gain);
+    object.connect(object.pan);
     object.start(0);
   
     object.trigger = function () {
       var now = context.currentTime;
       var currentGain = this.gain.gain.value;
   
-      this.gain.gain.cancelScheduledValues(now);
-      this.gain.gain.setValueAtTime(currentGain, now);
-      this.gain.gain.linearRampToValueAtTime(1.0, now + this.attackTime);
-      this.gain.gain.linearRampToValueAtTime(0, now + this.attackTime + this.releaseTime );
+      this.gain.gain.cancelScheduledValues( now );
+      this.gain.gain.setValueAtTime( currentGain, now );
+      this.gain.gain.linearRampToValueAtTime( this.amplitude, now + this.attackTime );
+      this.gain.gain.linearRampToValueAtTime( 0, now + this.attackTime + this.releaseTime );
     }
   }
 
-  o = context.createOscillator();
-  Oscillator( o, 300, 0.125, 0.3 );
+  // Make Osc's
+  var pitchRatio = [ 1, 1.1224, 1.2599, 1.3348, 1.4983, 1.6818, 1.8877 ];
+  var rootPitch = 220;
 
-  o.gain.connect(c);
-  o.gain.connect(context.destination);
+  p1 = context.createOscillator();
+  p2 = context.createOscillator();
+  p3 = context.createOscillator();
+  p4 = context.createOscillator();
+  p5 = context.createOscillator();
+  p6 = context.createOscillator();
+
+  Oscillator( p1, 1, 'sine', rootPitch, 0.125, 0.3 );
+  Oscillator( p2, 1, 'sine', rootPitch*pitchRatio[2], 0.125, 0.3 );
+  Oscillator( p3, 1, 'sine', rootPitch*pitchRatio[4], 0.125, 0.3 );
+  Oscillator( p4, 1, 'sine', rootPitch*pitchRatio[6], 0.125, 0.3 );
+
+
+  //p1.gain.connect( c );
+  p1.gain.connect( context.destination );
+  //p2.gain.connect( c );
+  p2.gain.connect( context.destination );
+  //p3.gain.connect( c );
+  p3.gain.connect( context.destination );
+  //p4.gain.connect( c );
+  p4.gain.connect( context.destination );
+
+
+
+  // testin
+  // var pitches = [110, 138.59, 164.81];
+
+  
+
+
+
 
 
   // for testing sound triggering
@@ -101,7 +134,10 @@ $( document ).ready(function() {
       a.trigger();
     }
     if (event.keyCode == 16) { // shift
-      o.trigger();
+      p1.trigger();
+      p2.trigger();
+      p3.trigger();
+      p4.trigger();
     }
   });
 
