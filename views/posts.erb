@@ -1,0 +1,18 @@
+<% @posts.each do |post| %>
+  <% if authorized? || post.published %>
+
+  	<h2><%= post.title %></h2>
+
+  	<% if authorized? %>
+  		<p class='meta'>id=<%= post.id %></p>
+  		<% if post.published %>
+  			<p class='meta published'>published</p>
+  		<% end %>
+  	<% end %>
+
+  	<p><%= post.body %></p>
+
+  <% end %>
+<% end %>
+
+<% if authorized? %><div id='admin'>hi admin</div><% end %>

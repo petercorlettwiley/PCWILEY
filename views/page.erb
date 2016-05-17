@@ -1,0 +1,8 @@
+<% if @page.published %>
+	<h3><%= @page.title %></h3>
+	<p><%= @page.id %></p>
+	<p><%= @page.body %></p>
+<% end %>
+
+
+<% if authorized? %><div id='admin'>hi admin</div><% end %>
