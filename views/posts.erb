@@ -3,6 +3,8 @@
 
   	<h2><%= post.title %></h2>
 
+    <img src="<%= post.images %>">
+
   	<% if authorized? %>
   		<p class='meta'>id=<%= post.id %></p>
   		<% if post.published %>

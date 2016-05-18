@@ -1,0 +1,7 @@
+<form role="form" action="" method="post">
+	<input type="text" name="title" value="<%= @post.title %>">
+  <textarea name="images"><%= @post.images %></textarea>
+	<textarea name="body"><%= @post.body %></textarea>
+	<input type="checkbox" value="true" name="published" <%= if @post.published then 'checked' else '' end %>>
+	<button type="submit" class="btn">update</button>
+</form>

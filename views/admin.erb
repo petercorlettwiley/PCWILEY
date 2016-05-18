@@ -1,0 +1,97 @@
+<style type='text/css'>
+  body {
+    padding: 0 0.5em;
+  }
+  table {
+    margin-top: 1em;
+  }
+  th, td {
+    padding: 0.25em 0em;
+    vertical-align: top;
+  }
+  th:nth-child(n + 2), td:nth-child(n + 2) {
+    padding-left: 1em;
+  }
+  th {
+    font-family: sans-serif;
+    text-align: left;
+    border-bottom: 1px solid;
+  }
+</style>
+
+<h1>hi admin</h1>
+
+<h2>pages</h2>
+
+<a href='/admin/newpage'>add new</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>slug</th>
+      <th>title</th>
+      <th>body</th>
+      <th>publised</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= page.id %></td>
+        <td><%= page.slug %></td>
+        <td><strong><%= page.title %></strong></td>
+        <td><%= page.body %></td>
+        <td><%= if page.published then 'yes' else 'no' end %></td>
+        <td><a href='/admin/editpage/<%= page.id %>'>edit</a> <button onClick='deleteID("page", <%= page.id %>)'>delete</button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h2>posts</h2>
+
+<a href='/admin/newpost'>add new</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>images</th>
+      <th>body</th>
+      <th>published</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><strong><%= post.title %></strong></td>
+        <td><em><%= post.images %></em></td>
+        <td><%= post.body %></td>
+        <td><%= if post.published then 'yes' else 'no' end %></td>
+        <td><a href='/admin/editpost/<%= post.id %>'>edit</a> <button onClick='deleteID("post", <%= post.id %>)'>delete</button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+
+function deleteID(type, id) {
+  if (confirm("u sure?")) {
+    $.post('/admin/delete' + type + '/' + id, function(result_data) {
+      location.reload();
+    }).error(function(){
+      console.log("error trying to delete");
+    });
+  } else {
+    return false;
+  }
+}
+
+</script>

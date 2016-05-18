@@ -6,10 +6,20 @@ require 'json'
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, "#{ENV['DATABASE_URL']}")
 
+class Page
+  include DataMapper::Resource
+  property :id, Serial
+  property :slug, Text
+  property :title, String
+  property :body, Text
+  property :published, Boolean, :default => false
+end
+
 class Post
   include DataMapper::Resource
   property :id, Serial
   property :title, String
+  property :images, Text
   property :body, Text
   property :published, Boolean, :default => false
 end
@@ -43,7 +53,30 @@ class PCWILEY < Sinatra::Base
 
   get '/admin' do
     protected!
+    @pages = Page.all
+    @posts = Post.all
     erb :admin
+  end
+
+  get '/admin/newpage' do
+    protected!
+    erb :page_new
+  end
+
+  post '/admin/newpage' do
+    newPage = Page.create(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published])
+    redirect '/admin'
+  end
+
+  get '/admin/editpage/:id' do
+    protected!
+    @page = Page.get(params[:id])
+    erb :page_edit
+  end
+
+  post '/admin/editpage/:id' do
+    Page.get(params[:id]).update(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published])
+    redirect '/admin'
   end
 
   get '/admin/newpost' do
@@ -52,7 +85,28 @@ class PCWILEY < Sinatra::Base
   end
 
   post '/admin/newpost' do
-    newPost = Post.create(:title => params[:title], :body => params[:body], :published => params[:published])
+    newPost = Post.create(:title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published])
+    redirect '/admin'
+  end
+
+  get '/admin/editpost/:id' do
+    protected!
+    @post = Post.get(params[:id])
+    erb :post_edit
+  end
+
+  post '/admin/editpost/:id' do
+    Post.get(params[:id]).update(:title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published])
+    redirect '/admin'
+  end
+
+  post '/admin/deletepost/:id' do
+    Post.get(params[:id]).destroy
+    redirect '/admin'
+  end
+
+  post '/admin/deletepage/:id' do
+    Page.get(params[:id]).destroy
     redirect '/admin'
   end
 
@@ -91,8 +145,8 @@ class PCWILEY < Sinatra::Base
 
   end
 
-  get '/:id' do
-    @page = Post.get(params[:id])
+  get '/:page' do
+    @page = Page.first(:slug => params[:page])
 
     unless @page.published
       halt 404, '<h1>Not Found</h1>'
@@ -100,5 +154,5 @@ class PCWILEY < Sinatra::Base
 
     erb :page
   end
-  
+
 end

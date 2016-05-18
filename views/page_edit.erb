@@ -1,0 +1,7 @@
+<form role="form" action="" method="post">
+  <input type="text" name="slug" value="<%= @page.slug %>">
+	<input type="text" name="title" value="<%= @page.title %>">
+	<textarea name="body"><%= @page.body %></textarea>
+	<input type="checkbox" value="true" name="published" <%= if @page.published then 'checked' else '' end %>>
+	<button type="submit" class="btn">update</button>
+</form>
