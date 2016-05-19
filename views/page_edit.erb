@@ -3,5 +3,10 @@
 	<input type="text" name="title" value="<%= @page.title %>">
 	<textarea name="body"><%= @page.body %></textarea>
 	<input type="checkbox" value="true" name="published" <%= if @page.published then 'checked' else '' end %>>
+  <select name="type">
+    <option value="page" <%= if @page.type == 'page' then 'selected' else '' end %>>page</option>
+    <option value="home" <%= if @page.type == 'home' then 'selected' else '' end %>>home</option>
+    <option value="archive" <%= if @page.type == 'archive' then 'selected' else '' end %>>archive</option>
+  </select>
 	<button type="submit" class="btn">update</button>
 </form>

@@ -1,0 +1,5 @@
+<h1 id='site_title'><a href="/"><%= @home.title %></a></h1>
+
+<% @links.each do |link| %>
+  <a href="/<%= link.slug %>" <%= if @page == link then 'class="active"' end %>><%= link.title %></a>
+<% end %>

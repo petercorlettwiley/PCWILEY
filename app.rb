@@ -13,6 +13,7 @@ class Page
   property :title, String
   property :body, Text
   property :published, Boolean, :default => false
+  property :type, String, :default => 'page'
 end
 
 class Post
@@ -45,12 +46,20 @@ class PCWILEY < Sinatra::Base
     end
   end
 
-  get '/design' do
-     # get the latest 20 posts #@posts = Post.all(:order => [ :id.desc ], :limit => 20)
-    @posts = Post.all
-    erb :posts
+  # home
+  get '/' do 
+    @page = Page.first(:type => 'home')
+    @links = Page.all(:published => true, :type.not => 'home')
+    @home = Page.first(:type => 'home')
+
+    unless @page.published
+      halt 404, '<h1>Not Found</h1>'
+    end
+
+    erb :page
   end
 
+  # admin section and commands
   get '/admin' do
     protected!
     @pages = Page.all
@@ -64,7 +73,8 @@ class PCWILEY < Sinatra::Base
   end
 
   post '/admin/newpage' do
-    newPage = Page.create(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published])
+    protected!
+    newPage = Page.create(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published], :type => params[:type])
     redirect '/admin'
   end
 
@@ -75,7 +85,8 @@ class PCWILEY < Sinatra::Base
   end
 
   post '/admin/editpage/:id' do
-    Page.get(params[:id]).update(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published])
+    protected!
+    Page.get(params[:id]).update(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published], :type => params[:type])
     redirect '/admin'
   end
 
@@ -85,6 +96,7 @@ class PCWILEY < Sinatra::Base
   end
 
   post '/admin/newpost' do
+    protected!
     newPost = Post.create(:title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published])
     redirect '/admin'
   end
@@ -96,23 +108,40 @@ class PCWILEY < Sinatra::Base
   end
 
   post '/admin/editpost/:id' do
+    protected!
     Post.get(params[:id]).update(:title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published])
     redirect '/admin'
   end
 
   post '/admin/deletepost/:id' do
+    protected!
     Post.get(params[:id]).destroy
-    redirect '/admin'
   end
 
   post '/admin/deletepage/:id' do
+    protected!
     Page.get(params[:id]).destroy
-    redirect '/admin'
   end
 
-  get '/admin/reset' do
-    Post.destroy
-    redirect '/admin'
+  # custom pages
+  get '/:page' do
+    @page = Page.first(:slug => params[:page])
+    @links = Page.all(:published => true, :type.not => 'home')
+    @home = Page.first(:type => 'home')
+
+    unless @page.published
+      halt 404, '<h1>Not Found</h1>'
+    end
+
+    case @page.type
+    when 'archive'
+      @posts = Post.all
+      erb :archive
+    when 'home'
+      redirect '/'
+    else
+      erb :page
+    end
   end
 
   get '/test/tone' do
@@ -121,6 +150,7 @@ class PCWILEY < Sinatra::Base
   end
 
   get '/test/sentiment' do
+    protected!
 
     c = Curl::Easy.new
     url = "http://www.sentiment140.com/api/bulkClassifyJson?appid=peter.c.wiley@gmail.com"
@@ -143,16 +173,6 @@ class PCWILEY < Sinatra::Base
 
     c.on_success {|easy| puts "success, add more easy handles" }
 
-  end
-
-  get '/:page' do
-    @page = Page.first(:slug => params[:page])
-
-    unless @page.published
-      halt 404, '<h1>Not Found</h1>'
-    end
-
-    erb :page
   end
 
 end
