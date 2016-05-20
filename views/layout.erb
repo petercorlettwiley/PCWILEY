@@ -11,7 +11,7 @@
   <!-- link rel="shortcut icon" href="/ico/favicon.ico"/ -->
 
   <link rel="stylesheet" href="/css/normalize.css">
-  <!--link rel="stylesheet" href="/css/grids.css" type="text/css"/ -->
+  <link rel="stylesheet" href="/css/style.css" type="text/css"/>
 
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -26,7 +26,7 @@
 
 </head>
 
-  <body>
+  <body id='<%= if @page then @page.slug else "admin" end %>'>
     <%= yield %>
   </body>
 

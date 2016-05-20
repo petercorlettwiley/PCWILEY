@@ -1,6 +1,8 @@
 <style type='text/css'>
   body {
     padding: 0 0.5em;
+    max-width: 900px;
+    margin: 0 auto;
   }
   table {
     margin-top: 1em;
@@ -8,6 +10,7 @@
   th, td {
     padding: 0.25em 0em;
     vertical-align: top;
+    word-break: break-all;
   }
   th:nth-child(n + 2), td:nth-child(n + 2) {
     padding-left: 1em;
@@ -16,6 +19,9 @@
     font-family: sans-serif;
     text-align: left;
     border-bottom: 1px solid;
+  }
+  img {
+    max-width: 100px;
   }
 </style>
 
@@ -31,6 +37,7 @@
       <th>id</th>
       <th>slug</th>
       <th>title</th>
+      <th>images</th>
       <th>body</th>
       <th>published</th>
       <th>type</th>
@@ -41,8 +48,9 @@
     <% @pages.each do |page| %>
       <tr>
         <td><%= page.id %></td>
-        <td><%= page.slug %></td>
-        <td><strong><%= page.title %></strong></td>
+        <td><a href='/<%= page.slug %>'><%= page.slug %></a></td>
+        <td><%= page.title %></td>
+        <td><%= page.images %></td>
         <td><%= page.body %></td>
         <td><%= if page.published then 'yes' else 'no' end %></td>
         <td><%= page.type %></td>
@@ -72,8 +80,8 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.id %></td>
-        <td><strong><%= post.title %></strong></td>
-        <td><em><%= post.images %></em></td>
+        <td><%= post.title %></td>
+        <td><%= post.images %></td>
         <td><%= post.body %></td>
         <td><%= if post.published then 'yes' else 'no' end %></td>
         <td><a href='/admin/editpost/<%= post.id %>'>edit</a> <button onClick='deleteID("post", <%= post.id %>)'>delete</button></td>

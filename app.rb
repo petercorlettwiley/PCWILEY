@@ -2,6 +2,7 @@ require 'sinatra'
 require 'data_mapper'
 require 'curb'
 require 'json'
+require 'compass'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, "#{ENV['DATABASE_URL']}")
@@ -11,6 +12,7 @@ class Page
   property :id, Serial
   property :slug, Text
   property :title, String
+  property :images, Text
   property :body, Text
   property :published, Boolean, :default => false
   property :type, String, :default => 'page'
@@ -29,6 +31,13 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 class PCWILEY < Sinatra::Base
+  #handle all the SASS files and convert to css on the fly
+  get '/css/:name.css' do
+    if :name != 'normalize' then 
+      content_type 'text/css', :charset => 'utf-8'
+      scss :"stylesheets/#{params[:name]}"
+    end
+  end
 
   # authorize user
   def authorized?
@@ -74,7 +83,7 @@ class PCWILEY < Sinatra::Base
 
   post '/admin/newpage' do
     protected!
-    newPage = Page.create(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published], :type => params[:type])
+    newPage = Page.create(:slug => params[:slug], :title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published], :type => params[:type])
     redirect '/admin'
   end
 
@@ -86,7 +95,7 @@ class PCWILEY < Sinatra::Base
 
   post '/admin/editpage/:id' do
     protected!
-    Page.get(params[:id]).update(:slug => params[:slug], :title => params[:title], :body => params[:body], :published => params[:published], :type => params[:type])
+    Page.get(params[:id]).update(:slug => params[:slug], :title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published], :type => params[:type])
     redirect '/admin'
   end
 
