@@ -1,9 +1,9 @@
 <%= erb :header %>
 
-<h3><%= @page.title %></h3>
-
 <%= @page.images %>
 
-<p><%= @page.body %></p>
+<div id='body'><%= @page.body %></div>
+
+<%= erb :nav %>
 
 <% if authorized? %><a href='/admin' id='admin'>admin</a><% end %>

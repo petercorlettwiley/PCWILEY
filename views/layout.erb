@@ -11,16 +11,16 @@
   <!-- link rel="shortcut icon" href="/ico/favicon.ico"/ -->
 
   <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/style.css" type="text/css"/>
+  <% if defined? @page then %><link rel="stylesheet" href="/css/style.css" type="text/css"/><% end %>
 
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
   <!-- Load jQuery + ui + paper.js + bootstrap from public cdn -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-  <!--script type="text/javascript" src="/js/lib/paper-full.min.js"></script>
+  <script type="text/javascript" src="/js/lib/paper-full.min.js"></script>
 
-  <script src="/js/main.js"></script>
+  <!--script src="/js/main.js"></script>
   <script src="/js/ga.js"></script -->
 
 
