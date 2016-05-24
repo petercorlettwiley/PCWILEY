@@ -166,6 +166,7 @@ canvas#main {
     top: 5.25rem;
     max-width: calc(100% - 3rem);
     max-height: calc(100% - 7rem) !important;
+    pointer-events: none;
   }
 }
 
