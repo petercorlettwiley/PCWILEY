@@ -1,23 +1,29 @@
 <%= erb :header %>
 
-<% @posts.each do |post| %>
+<div id='archive'>
+<% @posts.each_with_index do |post, index| %>
   <% if authorized? || post.published %>
 
-  	<h2><%= post.title %></h2>
+    <article class='post_<%= index %>'>
+      <div class='description'><h2><%= post.title %></h2>
+      <%= post.body %></div>
 
-    <%= post.images %>
+  	  <% if authorized? %>
+  	 	  <p class='meta'>id=<%= post.id %></p>
+  	 	  <% if post.published %>
+  	 		  <p class='meta published'>published</p>
+  	 	  <% end %>
+  	  <% end %>
 
-  	<% if authorized? %>
-  		<p class='meta'>id=<%= post.id %></p>
-  		<% if post.published %>
-  			<p class='meta published'>published</p>
-  		<% end %>
-  	<% end %>
-
-  	<p><%= post.body %></p>
+      <div class='images'>
+        <%= post.images %>
+      </div>
+  	  
+    </article>
 
   <% end %>
 <% end %>
+</div>
 
 <%= erb :nav %>
 

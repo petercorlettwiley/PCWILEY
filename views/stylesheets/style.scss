@@ -238,3 +238,30 @@ canvas#main {
   color: black;
   font-size: $font-size;
 }
+
+#archive {
+  margin: 7em 0;
+
+  article {
+    &:not(:last-child) {
+      margin-bottom: 14em;
+    }
+  }
+}
+
+.images {
+  max-width: 60%;
+  margin: 0 auto;
+  font-size: 0;
+  img {
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+article .description {
+  position: fixed;
+  right: 30px;
+  top: 200px;
+  left: 79%;
+}

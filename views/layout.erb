@@ -26,7 +26,7 @@
 
 </head>
 
-  <body id='<%= if @page then @page.slug else "admin" end %>'>
+  <body id='<%= if @page then @page.slug else "admin" end %>' class='<%= if @page then @page.type end %>'>
     <%= yield %>
   </body>
 
