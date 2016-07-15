@@ -14,37 +14,77 @@ $( document ).ready(function() {
     });
   }
 
-  $(window).resize(function(){updateWindowHeight();});
+  $(window).resize(function() {
+    updateWindowHeight();
+    setScrollArchive();
+  });
 
 });
 
-
-var posts = [];
-var $windowHeight = $(window).outerHeight();
-var windowPadding = 0.1;
+var posts = 0;
+var windowHeight = $(window).outerHeight();
+var windowPadding = 0.15;
 
 function setScrollArchive() {
+  var imageCount = 0;
   var $articles = $('body article');
-  for (var i = 0; i < $articles.length; i++) {
-    posts.push($('body article.post_'+i).offset().top);
+
+  function pushPost(i) { // add post info
+    var $post = $('body article.post_'+i);
+    var top = $post.offset().top;
+    var height = $post.outerHeight();
+    $post.attr('data-top', top).attr('data-height', height);
   }
-  console.log(posts);
+
+  $articles.each(function(i) {
+    $(this).find('img').each(function() {
+      var imageId = 'img_'+imageCount;
+      imageCount++;
+      $(this).attr('id', imageId);
+      var articleImg = document.getElementById(imageId);
+
+      if (articleImg.complete) {
+        pushPost(i);
+      } else {
+        articleImg.addEventListener('load', function() {
+          pushPost(i);
+        });
+        articleImg.addEventListener('error', function() {
+          console.log('error loading #img_'+imageCount);
+        });
+      }
+    });
+
+    posts++;
+  });
 }
 
 function scrollArchive() {
-  var $windowTop = $(window).scrollTop() ;
-  var $windowBottom = $windowTop + $windowHeight;
+  var windowTop = $(window).scrollTop();
+  var windowMiddle = windowTop + windowHeight/2;
+  var windowAdjust = windowHeight * windowPadding;
 
-  for (var i = 0; i < posts.length; i++) {
-    if($windowTop < posts[i] && $windowBottom > posts[i]) {
-      $('body article.post_'+i+' .description').css('opacity', 1);
-      console.log(i);
+  for (var i = 0; i < posts; i++) {
+    var $post = $('body article.post_'+i);
+    postTop = parseInt($post.attr('data-top'));
+    postBottom = postTop + parseInt($post.attr('data-height'));
+
+    if (postTop < windowMiddle+windowAdjust && postBottom > windowMiddle-windowAdjust) {
+      $post.find('.description').show();
+      console.log('show '+i+'   bottom '+postBottom);
     } else {
-      $('body article.post_'+i+' .description').css('opacity', 0);
+      $post.find('.description').hide();
+      console.log('hide '+i);
     }
+
+    //if($windowTop < posts[i] && $windowBottom > posts[i]) {
+    //  $('body article.post_'+i+' .description').css('opacity', 1);
+    //} else {
+    //  $('body article.post_'+i+' .description').css('opacity', 0);
+    //}
   }
 }
 
 function updateWindowHeight() {
-  $windowHeight = $(window).outerHeight();
+  windowHeight = $(window).outerHeight();
 }
