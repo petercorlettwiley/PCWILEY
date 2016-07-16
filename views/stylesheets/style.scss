@@ -22,19 +22,35 @@ $mobile-font-size-site-title: 66px;
 $mobile-body-padding-x: 20px;
 $mobile-body-padding-y: 15px;
 
+$font: 'MariaPro';
+$font_path: 'https://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
+@font-face {
+  font-family: $font;
+  src: url('#{$font_path}.eot?#iefix') format('embedded-opentype'),  url('#{$font_path}.otf')  format('opentype'),
+       url('#{$font_path}.woff') format('woff'), url('#{$font_path}.ttf')  format('truetype'), url('#{$font_path}.svg##{$font}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   font-size: $font-size;
   color: $black;
 }
 
 body {
+  font-family: $font;
   font-size: $font-size;
+  font-weight: normal;
   padding: $body-padding-y $body-padding-x;
 }
 @media (max-width: $mobile_break) { // mobile
   body {
     padding: $mobile-body-padding-y $mobile-body-padding-x;
   }
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  font-weight: normal;
 }
 
 @keyframes title_hover {
@@ -48,6 +64,14 @@ body {
   position: fixed;
   top: $body-padding-y - 6; // need to change for Maria
   left: $body-padding-x - 8; // need to change for Maria
+  right: $body-padding-x - 8;
+  text-align: justify;
+  text-align-last: justify;
+  &:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
   a {
     text-decoration: none;
     text-transform: uppercase;
