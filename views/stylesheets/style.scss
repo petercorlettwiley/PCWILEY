@@ -63,6 +63,7 @@ h1, h2, h3, h4, h5, h6, strong {
   margin: 0;
   font-size: $font-size-site-title;
   line-height: $line-height-site-title;
+  letter-spacing: floor($font-size-site-title / 3);
   position: fixed;
   top: $body-padding-y - 6; // need to change for Maria
   left: $body-padding-x - 8; // need to change for Maria
