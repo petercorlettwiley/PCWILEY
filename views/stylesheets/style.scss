@@ -67,9 +67,9 @@ h1, h2, h3, h4, h5, h6, strong {
   position: fixed;
   top: $body-padding-y - 6; // need to change for Maria
   left: $body-padding-x - 8; // need to change for Maria
-  right: $body-padding-x - 8;
-  text-align: justify;
-  text-align-last: justify;
+  //right: $body-padding-x - 8;
+  //text-align: justify;
+  //text-align-last: justify;
   &:after {
     content: "";
     display: inline-block;
