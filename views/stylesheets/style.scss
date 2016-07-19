@@ -24,7 +24,7 @@ $mobile-body-padding-x: 20px;
 $mobile-body-padding-y: 15px;
 
 $font: 'MariaPro';
-$font_path: 'https://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
+$font_path: 'http://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
 @font-face {
   font-family: $font;
   src: url('#{$font_path}.eot?#iefix') format('embedded-opentype'),  url('#{$font_path}.otf')  format('opentype'),
