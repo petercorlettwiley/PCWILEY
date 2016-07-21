@@ -81,6 +81,7 @@ h1, h2, h3, h4, h5, h6, strong {
     -webkit-text-stroke: 2px $black;
     color: transparent;
     transition: $transition;
+    margin-right: 1em;
     &:hover {
       -webkit-text-stroke-color: $blue;
       animation: title_hover 3s linear infinite;
@@ -280,8 +281,8 @@ canvas#main {
 }
 
 .images {
-  max-width: 60%;
-  margin: 0 auto;
+  max-width: 56%;
+  margin: 0 0 0 5rem;
   font-size: 0;
   img {
     display: inline-block;
@@ -290,8 +291,9 @@ canvas#main {
 }
 
 article .description {
+  @extend #body;
   position: fixed;
-  right: 30px;
-  top: 200px;
-  left: 79%;
+  //right: $body-padding-x;
+  //top: 200px;
+  //left: 44rem;
 }

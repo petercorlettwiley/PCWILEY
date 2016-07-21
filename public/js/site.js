@@ -54,9 +54,13 @@ function setScrollArchive() {
         });
       }
     });
-
+    
     posts++;
   });
+
+  if (posts == $articles.length) {
+    scrollArchive();
+  }
 }
 
 function scrollArchive() {
@@ -71,10 +75,8 @@ function scrollArchive() {
 
     if (postTop < windowMiddle+windowAdjust && postBottom > windowMiddle-windowAdjust) {
       $post.find('.description').show();
-      console.log('show '+i+'   bottom '+postBottom);
     } else {
       $post.find('.description').hide();
-      console.log('hide '+i);
     }
 
     //if($windowTop < posts[i] && $windowBottom > posts[i]) {
