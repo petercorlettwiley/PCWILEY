@@ -8,6 +8,7 @@ $( document ).ready(function() {
   });
 
   if($('body').hasClass('archive')) {
+    $('body article').css('opacity', 0).delay(1000).animate({opacity: 1}, 1000);
     setScrollArchive();
     $(window).scroll(function(){
       scrollArchive();

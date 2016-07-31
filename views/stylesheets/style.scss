@@ -79,6 +79,12 @@ h2 {
   padding: 0.75em 0.5em 0.666em;
   -webkit-text-stroke: 1px #000;
 }
+.page h2 {
+  display: inline-block;
+  &:first-child {
+    margin-top: 10rem;
+  }
+}
 
 @keyframes title_hover {
   0%   {-webkit-text-stroke-color: $black;}
@@ -93,6 +99,7 @@ h2 {
   position: fixed;
   top: $body-padding-y - 6; // need to change for Maria
   left: $body-padding-x - 8; // need to change for Maria
+  z-index: 3;
   //right: $body-padding-x - 8;
   //text-align: justify;
   //text-align-last: justify;
@@ -128,6 +135,17 @@ h2 {
   }
 }
 
+#site_nav:before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 85%;
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
 #site_nav ul {
   padding: 0;
   margin: 0;
@@ -275,6 +293,31 @@ canvas#main {
     max-height: calc(100% - 8rem) !important;
   }
 }
+
+#body p {
+  margin: 0 0 1em;
+}
+#body h2 {
+  margin-top: 2em;
+}
+#body .main_img {
+  width: 75%;
+  max-height: $sketch_height*1rem;
+  max-width: $sketch_width*1rem;
+  margin: 0 auto 1em;
+  display: block;
+}
+#body .center {
+  padding-left: 4rem;
+  text-align: center;
+}
+#music #body {
+  top: 10rem;
+  transform: translate(-50%, 0);
+  padding-bottom: 10rem;
+}
+
+/* admin */
 
 #admin {
   position: fixed;
