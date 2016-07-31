@@ -371,7 +371,7 @@ article .description {
   font-size: 2rem;
   line-height: $line-height;
   color: $black;
-
+  z-index: 13;
   a, a:visited, a:active {
     @extend .a;
     @extend .text-shadow;
