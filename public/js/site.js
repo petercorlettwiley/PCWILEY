@@ -17,13 +17,16 @@ $( document ).ready(function() {
   $(window).resize(function() {
     updateWindowHeight();
     setScrollArchive();
+    scrollArchive();
   });
-
 });
 
 var posts = 0;
 var windowHeight = $(window).outerHeight();
 var windowPadding = 0.15;
+
+var windowWidth = $(window).outerWidth();
+var mobile = 760;
 
 function setScrollArchive() {
   var imageCount = 0;
@@ -62,31 +65,35 @@ function setScrollArchive() {
     scrollArchive();
   }
 }
+setInterval(setScrollArchive, 500);
 
 function scrollArchive() {
-  var windowTop = $(window).scrollTop();
-  var windowMiddle = windowTop + windowHeight/2;
-  var windowAdjust = windowHeight * windowPadding;
-
-  for (var i = 0; i < posts; i++) {
-    var $post = $('body article.post_'+i);
-    postTop = parseInt($post.attr('data-top'));
-    postBottom = postTop + parseInt($post.attr('data-height'));
-
-    if (postTop < windowMiddle+windowAdjust && postBottom > windowMiddle-windowAdjust) {
-      $post.find('.description').show();
-    } else {
-      $post.find('.description').hide();
+  if (windowWidth > mobile) {
+    var windowTop = $(window).scrollTop();
+    var windowMiddle = windowTop + windowHeight/2;
+    var windowAdjust = windowHeight * windowPadding;
+  
+    for (var i = 0; i < posts; i++) {
+      var $post = $('body article.post_'+i);
+      postTop = parseInt($post.attr('data-top'));
+      postBottom = postTop + parseInt($post.attr('data-height'));
+  
+      if (postTop < windowMiddle && postBottom > windowMiddle) {
+        $post.find('.description').fadeIn(750);
+      } else {
+        $post.find('.description').fadeOut(250);
+      }
+  
     }
-
-    //if($windowTop < posts[i] && $windowBottom > posts[i]) {
-    //  $('body article.post_'+i+' .description').css('opacity', 1);
-    //} else {
-    //  $('body article.post_'+i+' .description').css('opacity', 0);
-    //}
+  } else {
+    for (var i = 0; i < posts; i++) {
+      var $post = $('body article.post_'+i);
+      $post.find('.description').show();
+    }
   }
 }
 
 function updateWindowHeight() {
   windowHeight = $(window).outerHeight();
+  windowWidth = $(window).outerWidth();
 }
