@@ -12,7 +12,7 @@ $sketch_height: 24; //em
 $black: #000;
 $blue: #00c;
 $magenta: #c0c;
-$yellow: yellow;
+$pink: pink;
 
 $transition: all 0.8s;
 
@@ -323,7 +323,7 @@ canvas#main {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: yellow;
+  background-color: $pink;
   color: black;
   font-size: $font-size;
 }

@@ -1,11 +1,11 @@
 $( document ).ready(function() {
 
   // Replace spaces in links with non-breaking-spaces
-  $('#body a').contents().filter(function(){
+  /*$('#body a').contents().filter(function(){
     return this.nodeType == 3 // Text node
   }).each(function(){
     this.data = this.data.replace(/ /g, '\u00a0');
-  });
+  });*/
 
   if($('body').hasClass('archive')) {
     $('body article').css('opacity', 0).delay(1000).animate({opacity: 1}, 1000);
