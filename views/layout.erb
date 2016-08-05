@@ -15,19 +15,20 @@
 
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <!-- Load jQuery + ui + paper.js + bootstrap from public cdn -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/site.js"></script>
-  <script type="text/javascript" src="/js/lib/paper-full.min.js"></script>
-
-  <!--script src="/js/main.js"></script>
-  <script src="/js/ga.js"></script -->
-
-
 </head>
 
   <body id='<%= if @page then @page.slug else "admin" end %>' class='<%= if @page then @page.type end %>'>
     <%= yield %>
   </body>
+
+
+  <!-- Load jQuery + ui + paper.js + bootstrap from public cdn -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/site.js"></script>
+  <script type="text/javascript" src="/js/mouse.js"></script>
+  <script type="text/javascript" src="/js/lib/paper-full.min.js"></script>
+
+  <!--script src="/js/main.js"></script>
+  <script src="/js/ga.js"></script -->
 
 </html>
