@@ -8,7 +8,7 @@ $( document ).ready(function() {
   });*/
 
   if($('body').hasClass('archive')) {
-    $('body article').css('opacity', 0).delay(1000).animate({opacity: 1}, 1000);
+    $('#archive article').css('opacity', 0).delay(1000).animate({opacity: 1}, 1000);
     setScrollArchive();
     $(window).scroll(function(){
       scrollArchive();
@@ -31,10 +31,10 @@ var mobile = 760;
 
 function setScrollArchive() {
   var imageCount = 0;
-  var $articles = $('body article');
+  var $articles = $('#archive article');
 
   function pushPost(i) { // add post info
-    var $post = $('body article.post_'+i);
+    var $post = $('#archive article.post_'+i);
     var top = $post.offset().top;
     var height = $post.outerHeight();
     $post.attr('data-top', top).attr('data-height', height);
