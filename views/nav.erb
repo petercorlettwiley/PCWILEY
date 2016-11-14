@@ -1,4 +1,4 @@
-<nav id='site_nav'>
+<nav id='nav'>
   <ul>
 <% @links.each do |link| %>
   <li><a href="/<%= link.slug %>" <%= if @page == link then 'class="active"' end %>><%= link.title %></a></li>

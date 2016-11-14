@@ -75,21 +75,21 @@ function scrollArchive() {
     var windowAdjust = windowHeight * windowPadding;
   
     for (var i = 0; i < posts; i++) {
-      var $post = $('body article.post_'+i);
+      var $post = $('#archive article.post_'+i);
       postTop = parseInt($post.attr('data-top'));
       postBottom = postTop + parseInt($post.attr('data-height'));
   
       if (postTop < windowMiddle && postBottom > windowMiddle) {
-        $post.find('.description').fadeIn(750);
+        //$post.find('.description').fadeIn(750);
       } else {
-        $post.find('.description').fadeOut(250);
+        //$post.find('.description').fadeOut(250);
       }
   
     }
   } else {
     for (var i = 0; i < posts; i++) {
-      var $post = $('body article.post_'+i);
-      $post.find('.description').show();
+      var $post = $('#archive article.post_'+i);
+      //$post.find('.description').show();
     }
   }
 }

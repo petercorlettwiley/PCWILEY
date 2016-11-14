@@ -1,12 +1,22 @@
 <%= erb :header %>
 
+<div id='text'>
+<% @posts.each_with_index do |post, index| %>
+  <% if authorized? || post.published %>
+
+      <article class='post_<%= index %>'><h2><%= post.title %></h2>
+        <%= post.body %>
+      </article>
+
+  <% end %>
+<% end %>
+</div>
+
 <div id='archive'>
 <% @posts.each_with_index do |post, index| %>
   <% if authorized? || post.published %>
 
     <article class='post_<%= index %>'>
-      <div class='description'><h2><%= post.title %></h2>
-      <%= post.body %></div>
 
   	  <% if authorized? %>
   	 	  <p class='meta'>id=<%= post.id %></p>

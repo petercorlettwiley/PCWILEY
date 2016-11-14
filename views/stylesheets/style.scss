@@ -1,30 +1,16 @@
-$font-size-site-title: 76px;
-$line-height-site-title: 10/11;
-$font-size: 14px;
-$line-height: 1.2;
+$font-size-site-title: 55px;
+$line-height-site-title: 1;
+$font-size: 21px;
+$line-height: 24px;
 
-$body-padding-x: 30px;
-$body-padding-y: 25px;
-
-$sketch_width: 40; //em
-$sketch_height: 24; //em
-
-$black: #000;
-$blue: #00c;
-$magenta: #c0c;
-$pink: pink;
+$unit_small: 25px;
+$unit_large: 140px;
 
 $transition: all 0.8s;
 
-$desktop_break: ($sketch_width + 15)*20px;
-
-$mobile_break: 38*20+0px;
-$mobile-font-size-site-title: 36px;
-$mobile-body-padding-x: 20px;
-$mobile-body-padding-y: 15px;
-
 $font: 'MariaPro';
 $font_path: 'http://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
+
 @font-face {
   font-family: $font;
   src: url('#{$font_path}.eot?#iefix') format('embedded-opentype'),  url('#{$font_path}.otf')  format('opentype'),
@@ -32,383 +18,170 @@ $font_path: 'http://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
   font-weight: normal;
   font-style: normal;
 }
-.text-shadow {
-  text-shadow: 0.05em 0 #fff, -0.05em 0 #fff,0 0.05em #fff,0 -0.05em #fff,0.05em 0 #fff,-0.05em 0 #fff,0.05em 0 #fff,-0.05em 0 #fff,0.05em 0 #fff,0 0 #fff,0.05em 0 #fff,-0.05em 0 #fff;
-}
-.a {
-  color: $black;
-  text-decoration: none;
-  background: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient($blue,$blue);
-  background-size: .05em 1px, .05em 1px,1px 1px;
-  background-repeat: no-repeat,no-repeat,repeat-x;
-  background-position: 0 90%, 100% 95%, 0 90%;
-  transition: $transition;
-  &:hover {
-    animation: link_hover 0.75s linear infinite;
-  }
-}
 
-html {
-  font-size: $font-size;
-  line-height: $line-height;
-  color: $black;
-}
-
+/*
+  Body & Global
+*/
 body {
-  font-family: $font;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
   font-size: $font-size;
   font-weight: normal;
-  padding: $body-padding-y $body-padding-x;
+  line-height: $line-height;
+  letter-spacing: 1px;
 }
-@media (max-width: $mobile_break) { // mobile
-  body {
-    padding: $mobile-body-padding-y $mobile-body-padding-x;
-  }
-}
-
 h1, h2, h3, h4, h5, h6, strong {
   font-weight: normal;
 }
-h2 {
-  font-size: inherit;
-  margin: 0 0 ($line-height * 1em) 0;
-  color: transparent;
-  border: 1px solid #000;
-  text-align: center;
-  letter-spacing: 0.1em;
-  padding: 0.75em 0.5em 0.666em;
-  -webkit-text-stroke: 1px #000;
-}
-.page h2 {
-  display: inline-block;
-  &:first-child {
-    margin-top: 10rem;
-  }
-}
 
-@keyframes title_hover {
-  0%   {-webkit-text-stroke-color: $black;}
-  33%  {-webkit-text-stroke-color: $blue;}
-  66%  {-webkit-text-stroke-color: $magenta;}
-}
-#site_title {
-  margin: 0;
+/*
+  Site Title
+*/
+h1#title {
   font-size: $font-size-site-title;
   line-height: $line-height-site-title;
-  letter-spacing: floor($font-size-site-title / 3);
+  font-family: 'Brush Script MT', serif;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 0;
   position: fixed;
-  top: $body-padding-y - 6; // need to change for Maria
-  left: $body-padding-x - 8; // need to change for Maria
-  z-index: 3;
-  //right: $body-padding-x - 8;
-  //text-align: justify;
-  //text-align-last: justify;
-  &:after {
-    content: "";
-    display: inline-block;
-    width: 100%;
-  }
+  top: $unit_small;
+  left: $font-size-site-title + $unit_small;
+  transform-origin: 0 0;
+  transform: rotate(90deg);
   a {
     text-decoration: none;
-    text-transform: uppercase;
-    -webkit-text-stroke: 1px $black;
+    -webkit-text-stroke: 1px #000;
     color: transparent;
-    transition: $transition;
-    margin-right: 1em;
-    &:hover {
-      -webkit-text-stroke-color: $blue;
-      animation: title_hover 0.5s linear infinite;
-    }
-    &:active, &:visited {
-      color: transparent;
-    }
-  }
-}
-@media (max-width: $mobile_break) { // mobile
-  #site_title {
-    font-size: $mobile-font-size-site-title;
-    top: $mobile-body-padding-y - 4; // need to change for Maria
-    left: $mobile-body-padding-x - 8; // need to change for Maria
-    a {
-      -webkit-text-stroke: 1px $black;
-    }
   }
 }
 
-#site_nav:before {
-  content: '';
+/*
+  Nav
+*/
+nav#nav {
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 85%;
-  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  left: $unit_small;
+  bottom: $unit_small;
 }
-#site_nav ul {
-  padding: 0;
+nav#nav ul {
   margin: 0;
-  li {
-    position: fixed;
-    font-size: 2rem;
-    &:nth-child(1) {
-      left: $body-padding-x - 3; // need to change for Maria
-      bottom: $body-padding-y * 2/3;
-    }
-    &:nth-child(2) {
-      bottom: $body-padding-y * 2/3;
-      left: calc(50% - 1.3em); // need to change for Maria
-    }
-    &:nth-child(3) {
-      bottom: $body-padding-y * 2/3;
-      right: $body-padding-x - 3;
-    }
-    a, a:active, a:visited {
-      color: $black;
-      text-decoration: none;
-      transition: $transition;
-      @extend .text-shadow;
-      @extend .a;
-    }
-  }
+  padding: 0;
 }
-@media (max-width: $mobile_break) {
-  #site_nav ul li {
-    font-size: 1.5rem;
-    &:nth-child(1) {
-      left: $mobile-body-padding-x - 3; // need to change for Maria
-      bottom: $mobile-body-padding-y * 2/3;
-    }
-    &:nth-child(2) {
-      bottom: $mobile-body-padding-y * 2/3;
-      left: calc(50% - 1.3em); // need to change for Maria
-    }
-    &:nth-child(3) {
-      bottom: $mobile-body-padding-y * 2/3;
-      right: $mobile-body-padding-x - 3;
-    }
-  }
+nav#nav ul li {
+  margin-top: $unit_small / 2;
 }
-
-#body {
-  min-width: 1100px;
-  box-sizing: border-box;
-  padding: 0 4rem 0.5rem 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: right;
-  font-size: 2rem;
-  line-height: $line-height;
-  color: $black;
-  p:first-child {
-    margin-top: 0;
-  }
-}
-@media (max-width: $desktop_break) { //canvas width + 2x padding of canvas container
-  #body {
-    min-width: 100%;
-  }
-}
-@media (max-width: $mobile_break) {
-  #body {
-    position: static;
-    transform: none;
-    padding-top: 8rem;
-    padding-right: 0;
-    font-size: 1.5rem;
-  }
-}
-@media (orientation: landscape) and (max-width: $mobile_break) and (min-device-width: 375px) and (max-device-width: 667px) { // serious mobile targeting
-  #body {
-    padding-top: 6rem;
-  }
-}
-
-@keyframes link_hover {
-  0%   {
-    background: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient($blue,$blue);
-    background-size: .05em 1px, .05em 1px,1px 1px;
-    background-repeat: no-repeat,no-repeat,repeat-x;
-    background-position: 0 90%, 100% 95%, 0 90%;
-  }
-  50%  {
-    background: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient($magenta,$magenta);
-    background-size: .05em 1px, .05em 1px,1px 1px;
-    background-repeat: no-repeat,no-repeat,repeat-x;
-    background-position: 0 90%, 100% 95%, 0 90%;
-  }
-}
-#body a, #body a:visited, #body a:active {
-  color: $black;
+nav#nav ul a {
   text-decoration: none;
-  position: relative;
-  @extend .text-shadow;
-  @extend .a;
 }
 
-#container_canvas {
+/*
+  Text
+*/
+div#text {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 7rem 7.5rem 5rem; 
-  z-index: -1;
+  left: $unit_large;
+  top: $unit_small;
+  width: $unit_large*2;
 }
-
-canvas#main {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: $sketch_width*1em;
-  max-height: $sketch_height*1em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-@media (max-width: $desktop_break) { //canvas width + 2x padding of canvas container
-  canvas#main {
-    max-width: calc(100% - 15rem);
-  }
-}
-@media (max-width: $mobile_break) { // mobile
-  #container_canvas {
-    padding: 0;
-  }
-  canvas#main {
-    margin: 0;
-    position: fixed;
-    transform: none;
-    left: 0;
-    top: 5.25rem;
-    max-width: calc(100% - 3rem);
-    max-height: calc(100% - 10rem) !important;
-  }
-}
-@media (orientation: landscape) and (max-width: $mobile_break) and (min-device-width: 375px) and (max-device-width: 667px) { // serious mobile targeting
-  canvas#main {
-    max-height: calc(100% - 8rem) !important;
-  }
-}
-
-#body p {
-  margin: 0 0 1em;
-}
-#body h2 {
-  margin-top: 2em;
-}
-#body .main_img {
-  width: 75%;
-  max-height: $sketch_height*1rem;
-  max-width: $sketch_width*1rem;
-  margin: 0 auto 1em;
-  display: block;
-}
-#body .center {
-  padding-left: 4rem;
-  text-align: center;
-}
-#music #body {
-  top: 10rem;
-  transform: translate(-50%, 0);
-  padding-bottom: 10rem;
-}
-
-/* admin */
-
-#admin {
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: $pink;
-  color: black;
+div#text h2, div#text h3 {
+  margin: 0;
+  font-weight: normal;
   font-size: $font-size;
-}
-
-#archive {
-  margin: 7em 0;
-
-  article {
-    &:not(:last-child) {
-      margin-bottom: 14em;
-    }
-  }
-}
-.meta {
-  display: none;
-}
-
-/* gallery/archive page */
-
-$image_width: 660px;
-$description_width: 220px;
-$description_column: 40px;
-$description_top: 160px;
-$column_width: $image_width + $description_column + $description_width;
-
-.images {
-  width: $image_width;
-  margin: 0 auto;
-  font-size: 0;
-  padding-right: $description_width+$description_column;
-  box-sizing: content-box;
-  img {
-    display: inline-block;
-    width: 100%;
-  }
-}
-
-article .description {
-  width: $description_width;
-  box-sizing: content-box;
-  padding: 0 0 0 0;
-  position: fixed;
-  left: calc(50% + #{$column_width/2 - $description_width});
-  top: $description_top;
-  font-size: 2rem;
   line-height: $line-height;
-  color: $black;
-  z-index: 13;
-  a, a:visited, a:active {
-    @extend .a;
-    @extend .text-shadow;
+  text-transform: uppercase;
+}
+div#text p {
+  font-size: $font-size;
+  line-height: $line-height;
+  margin: $line-height 0;
+}
+div#archive {
+  padding: $unit_small 0;
+}
+div#archive article {
+  float: none;
+  height: 590px;
+  margin-left: $unit_large + $unit_large*2 + $unit_small;
+  margin-right: $unit_small;
+  max-width: 800px;
+  min-width: 580px;
+}
+div#archive article:nth-of-type(n+2) {
+  margin-top: $unit_large;
+}
+div#archive article:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/*
+  Break 1
+*/
+/* break_1 = 140px + 280px + 25px + 580px +25px*/
+/* mobile = 780 */
+@media (max-width: 1050px) {
+  div#archive {
+    text-align: right;
+  }
+  div.image-container {
+    float: right;
+    width: 580px;
+    margin-left: 0;
+  }
+}
+/*
+  Mobile break
+*/
+@media (max-width: 780px) {
+  h1#title {
+    transform: rotate(0);
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 46px;
+    letter-spacing: 3px;
+  }
+  
+  nav#nav {
+    right: $unit_small;
+  }
+  nav#nav ul li {
+    position: absolute;
+    bottom: 0;
+  }
+  nav#nav ul li:last-child {
+    right: 0;
+  }
+  div#text {
+    left: $unit_small;
+    right: $unit_small;
+    width: auto;
+    top: 100px;
+  }
+  div#archive {
+    padding: 200px $unit_small $unit_small*2;
+  }
+  div.image-container {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
   }
 }
 
-@media (max-width: $column_width+$body-padding-x*2) {
-  .images {
-    width: percentage(($image_width - $body-padding-x)/$column_width);
-    margin: 0 0 0 $body-padding-x;
-    padding: 0;
-  }
-  article .description {
-    width: percentage(($description_width - $body-padding-x)/$column_width);
-    left: auto;
-    right: $body-padding-x;
-  }
+/*
+  Admin
+*/
+a#admin {
+  position: fixed;
+  top: 0;
+  right: 0;
 }
-
-@media (max-width: $mobile_break) {
-  h2 {
-    width: 8em;
-    //margin-left: auto;
-    //margin-right: auto;
-  }
-  .images {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 $mobile-body-padding-x;
-    margin: 0 auto;
-  }
-  article .description {
-    position: static;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 1.5em;
-    padding: 0 $description_column+$mobile-body-padding-x;
-    margin-bottom: 2em;
-  }
+p.meta {
+  display: none;
 }
