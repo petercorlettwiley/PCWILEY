@@ -1,35 +1,38 @@
 $( document ).ready(function() {
 
-  // Replace spaces in links with non-breaking-spaces
-  /*$('#body a').contents().filter(function(){
-    return this.nodeType == 3 // Text node
-  }).each(function(){
-    this.data = this.data.replace(/ /g, '\u00a0');
-  });*/
+  /* Archive page functions */
 
   if($('body').hasClass('archive')) {
-    $('#archive article').css('opacity', 0).delay(1000).animate({opacity: 1}, 1000);
+    /* Call archive scroll hide/show functionality */
     setScrollArchive();
     $(window).scroll(function(){
       scrollArchive();
     });
+    $(window).resize(function() {
+      updateWindowHeight();
+      setScrollArchive();
+      scrollArchive();
+    });
+
+    /* Call archive image click through functionality */
+    $('#archive article .images').click(function() {
+      shuffleImg($(this));
+    });
   }
 
-  $(window).resize(function() {
-    updateWindowHeight();
-    setScrollArchive();
-    scrollArchive();
-  });
 });
+
+/* Archive scroll hide/show functionality */
 
 var posts = 0;
 var windowHeight = $(window).outerHeight();
-var windowPadding = 0.15;
+var windowPadding = 0;
 
 var windowWidth = $(window).outerWidth();
-var mobile = 760;
+var mobile = 820;
 
 function setScrollArchive() {
+  posts = 0;
   var imageCount = 0;
   var $articles = $('#archive article');
 
@@ -45,8 +48,8 @@ function setScrollArchive() {
       var imageId = 'img_'+imageCount;
       imageCount++;
       $(this).attr('id', imageId);
-      var articleImg = document.getElementById(imageId);
 
+      var articleImg = document.getElementById(imageId);
       if (articleImg.complete) {
         pushPost(i);
       } else {
@@ -58,7 +61,6 @@ function setScrollArchive() {
         });
       }
     });
-    
     posts++;
   });
 
@@ -66,7 +68,6 @@ function setScrollArchive() {
     scrollArchive();
   }
 }
-setInterval(setScrollArchive, 500);
 
 function scrollArchive() {
   if (windowWidth > mobile) {
@@ -80,16 +81,15 @@ function scrollArchive() {
       postBottom = postTop + parseInt($post.attr('data-height'));
   
       if (postTop < windowMiddle && postBottom > windowMiddle) {
-        //$post.find('.description').fadeIn(750);
+        $post.find('.description').show();
       } else {
-        //$post.find('.description').fadeOut(250);
+        $post.find('.description').hide();
       }
-  
     }
   } else {
     for (var i = 0; i < posts; i++) {
       var $post = $('#archive article.post_'+i);
-      //$post.find('.description').show();
+      $post.find('.description').show();
     }
   }
 }
@@ -98,3 +98,12 @@ function updateWindowHeight() {
   windowHeight = $(window).outerHeight();
   windowWidth = $(window).outerWidth();
 }
+
+/* Archive image click through functionality */
+
+function shuffleImg(obj) {
+  var $container = obj;
+  var $first_child = $container.children().first();
+  $first_child.appendTo($container);
+}
+
