@@ -5,14 +5,15 @@ $( document ).ready(function() {
   if($('body').hasClass('archive')) {
     /* Call archive scroll hide/show functionality */
     setScrollArchive();
-    $(window).scroll(function(){
+
+    /*$(window).scroll(function(){
       scrollArchive();
     });
     $(window).resize(function() {
       updateWindowHeight();
       setScrollArchive();
       scrollArchive();
-    });
+    });*/
 
     /* Call archive image click through functionality */
     $('#archive article .images').click(function() {
@@ -52,10 +53,12 @@ function setScrollArchive() {
   }
 
   $articles.each(function(i) {
-    console.log($(this));
+    var postId = 'img_'+i;
+    $(this).attr('id', postId);
+    
   });
 
-  $articles.find('img').each(function(i) {
+  /*$articles.find('img').each(function(i) {
     var imageId = 'img_'+i;
     $(this).attr('id', imageId);
     var articleImg = document.getElementById(imageId);
@@ -69,7 +72,7 @@ function setScrollArchive() {
         console.log('error loading #img_'+i);
       });
     }
-  });
+  });*/
   /*if (posts == $articles.length) {
     scrollArchive();
   }*/
