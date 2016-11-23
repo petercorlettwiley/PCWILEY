@@ -33,40 +33,46 @@ var mobile = 820;
 
 function setScrollArchive() {
   posts = 0;
-  var imageCount = 0;
+
   var $articles = $('#archive article');
-  console.log($articles.length);
+
+  var imageCount = 0;
+  var imageCountTotal = $articles.find('img').length;
 
   function pushPost(i) { // add post info
     var $post = $('#archive article.post_'+i);
     var top = $post.offset().top;
     var height = $post.outerHeight();
     $post.attr('data-top', top).attr('data-height', height);
+
+    //imageCount++
+    //if (imageCount == imageCountTotal - 1){
+    //  scrollArchive();
+    //}
   }
 
   $articles.each(function(i) {
-    $(this).find('img').each(function() {
-      var imageId = 'img_'+imageCount;
-      $(this).attr('id', imageId);
-
-      var articleImg = document.getElementById(imageId);
-      if (articleImg.complete) {
-        pushPost(i);
-      } else {
-        articleImg.addEventListener('load', function() {
-          pushPost(i);
-        });
-        articleImg.addEventListener('error', function() {
-          console.log('error loading #img_'+imageCount);
-        });
-      }
-    });
-    posts++;       // need to test if 'all images in one article are loaded, posts++'
+    console.log($(this));
   });
 
-  if (posts == $articles.length) {
+  $articles.find('img').each(function(i) {
+    var imageId = 'img_'+i;
+    $(this).attr('id', imageId);
+    var articleImg = document.getElementById(imageId);
+    if (articleImg.complete) {
+      //pushPost(i);
+    } else {
+      articleImg.addEventListener('load', function() {
+        //pushPost(i);
+      });
+      articleImg.addEventListener('error', function() {
+        console.log('error loading #img_'+i);
+      });
+    }
+  });
+  /*if (posts == $articles.length) {
     scrollArchive();
-  }
+  }*/
 }
 
 function scrollArchive() {
