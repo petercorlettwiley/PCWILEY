@@ -1,121 +1,138 @@
-$( document ).ready(function() {
-
-  /* Archive page functions */
-
-  if($('body').hasClass('archive')) {
-    /* Call archive scroll hide/show functionality */
-    setScrollArchive();
-
-    /*$(window).scroll(function(){
-      scrollArchive();
-    });
-    $(window).resize(function() {
-      updateWindowHeight();
-      setScrollArchive();
-      scrollArchive();
-    });*/
-
-    /* Call archive image click through functionality */
-    $('#archive article .images').click(function() {
-      shuffleImg($(this));
-    });
-  }
-
-});
-
-/* Archive scroll hide/show functionality */
-
 var posts = 0;
+var images = 0;
+
+var $articles = $('#archive article');
+
 var windowHeight = $(window).outerHeight();
-var windowPadding = 0;
-
 var windowWidth = $(window).outerWidth();
-var mobile = 820;
+var windowPadding = 0.5;
 
-function setScrollArchive() {
-  posts = 0;
+function loadImages() {
 
-  var $articles = $('#archive article');
+  $articles.find('img').each(function(i) {
+    var id = 'img_'+i;
+    $(this).attr('id', id);
 
-  var imageCount = 0;
-  var imageCountTotal = $articles.find('img').length;
-
-  function pushPost(i) { // add post info
-    var $post = $('#archive article.post_'+i);
-    var top = $post.offset().top;
-    var height = $post.outerHeight();
-    $post.attr('data-top', top).attr('data-height', height);
-
-    //imageCount++
-    //if (imageCount == imageCountTotal - 1){
-    //  scrollArchive();
-    //}
-  }
-
-  $articles.each(function(i) {
-    var postId = 'img_'+i;
-    $(this).attr('id', postId);
-    
-  });
-
-  /*$articles.find('img').each(function(i) {
-    var imageId = 'img_'+i;
-    $(this).attr('id', imageId);
-    var articleImg = document.getElementById(imageId);
+    var articleImg = document.getElementById(id);
     if (articleImg.complete) {
-      //pushPost(i);
+      newImageLoaded();
     } else {
       articleImg.addEventListener('load', function() {
-        //pushPost(i);
+        newImageLoaded();
       });
       articleImg.addEventListener('error', function() {
         console.log('error loading #img_'+i);
       });
     }
-  });*/
-  /*if (posts == $articles.length) {
-    scrollArchive();
-  }*/
-}
+  });
 
-function scrollArchive() {
-  if (windowWidth > mobile) {
-    var windowTop = $(window).scrollTop();
-    var windowMiddle = windowTop + windowHeight/2;
-    var windowAdjust = windowHeight * windowPadding;
-  
-    for (var i = 0; i < posts; i++) {
-      var $post = $('#archive article.post_'+i);
-      postTop = parseInt($post.attr('data-top'));
-      postBottom = postTop + parseInt($post.attr('data-height'));
-
-      $description = $('#text article.post_'+i);
-      if (postTop < windowMiddle && postBottom > windowMiddle) {
-        $description.show();
-        console.log('show_'+i+": top("+postTop+"), bottom("+postBottom+"), mid("+windowMiddle+")");
-      } else {
-        $description.hide();
-        console.log('hidden_'+i+": top("+postTop+"), bottom("+postBottom+"), mid("+windowMiddle+")");
-      }
-    }
-  } else {
-    for (var i = 0; i < posts; i++) {
-      var $post = $('#archive article.post_'+i);
-      $post.find('.description').show();
+  function newImageLoaded() {
+    images++;
+    if (images == $articles.find('img').length) {
+      console.log('all images loaded :)');
+      setScrollArchive();
     }
   }
 }
 
-function updateWindowHeight() {
+
+function setScrollArchive() {
+
+  posts = 0;
+
+  $articles.each(function(i){
+    var $post = $(this);
+    var top = $post.offset().top;
+    var height = $post.outerHeight();
+
+    
+    $post.find('img').css('max-height', height).css('width', 'auto');
+    $post.find('.images').css('height', height);
+    $post.attr('data-top', top).attr('data-height', height);
+    posts++;
+
+    if (posts == $articles.length){
+      console.log('all posts updated :)');
+      scrollArchive();
+    }
+  });
+}
+
+
+function updateWindowSize() {
   windowHeight = $(window).outerHeight();
   windowWidth = $(window).outerWidth();
 }
 
-/* Archive image click through functionality */
 
-function shuffleImg(obj) {
-  var $container = obj;
-  var $first_child = $container.children().first();
-  $first_child.appendTo($container);
+function scrollArchive() {
+
+  var windowTop = $(window).scrollTop();
+  var windowMiddle = windowTop + windowHeight/2;
+  var windowBottom = windowTop + windowHeight;
+  var windowTopPad = windowMiddle - windowPadding/2*windowHeight;
+  var windowBottomPad = windowMiddle + windowPadding/2*windowHeight;
+
+  $articles.each(function(i) {
+    var articleHeight = parseInt($(this).attr('data-height'));
+    var articleTop = parseInt($(this).attr('data-top'));
+    var articleBottom = articleTop + articleHeight;
+    var articleMiddle = articleTop + articleHeight/2;
+
+    if (articleTop < windowBottom && articleBottom > windowTop) {
+      var opacity;
+      if (articleMiddle < windowTopPad) {
+        opacity = 1 - Math.abs(articleMiddle - windowTopPad)/(windowPadding*windowHeight);
+      } else if(articleMiddle > windowBottomPad) {
+        opacity = 1 - Math.abs(articleMiddle - windowBottomPad)/(windowPadding*windowHeight);
+      } else {
+        opacity = 1;
+      }
+      $(this).css('opacity', opacity);
+    } else {
+      $(this).css('opacity', 0);
+    }
+
+    var $text = $(this).find('.text');
+
+    if (articleTop < windowTop) {
+      $text.css('position', 'fixed');
+    } else {
+      $text.css('position', 'absolute');
+    }
+
+  });
+
 }
 
+function shuffleImg(obj, e) {
+  var $container = obj;
+
+  var offset = $container.offset();
+  var mouse_x = (e.pageX - offset.left);
+  var mid_line = $container.outerWidth()/2;
+
+  var shuffle_next = mouse_x > mid_line;
+
+  var $first_child = $container.children().first();
+  var $last_child = $container.children().last();
+
+  shuffle_next ? $first_child.appendTo($container) : $last_child.prependTo($container);
+}
+
+$(document).ready(function() {
+  loadImages();
+
+  $('#archive article .images').click(function(e) {
+    shuffleImg($(this), e);
+  });
+});
+
+$(window).resize(function() {
+  updateWindowSize();
+  setScrollArchive();
+});
+
+$(window).scroll(function(){
+  scrollArchive();
+});
