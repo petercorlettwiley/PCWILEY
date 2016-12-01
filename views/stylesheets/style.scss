@@ -191,20 +191,23 @@ div#archive div.images {
   nav#nav ul li:last-child {
     right: 0;
   }
-  div#text {
-    left: $unit_small;
-    right: $unit_small;
-    width: auto;
-    top: 100px;
-  }
+
   div#archive {
-    padding: 200px $unit_small $unit_small*2;
-    background-color: blue;
+    margin: 0;
+    padding: 200px $unit_small $unit_small*3;
+
     article {
       margin: 0;
       width: 100%;
       max-width: 100%;
       min-width: auto;
+      background-color: blue;
+    }
+
+    div.text {
+      position: static;
+      display: inline-block;
+      vertical-align: top;
     }
   }
 }

@@ -7,6 +7,8 @@ var windowHeight = $(window).outerHeight();
 var windowWidth = $(window).outerWidth();
 var windowPadding = 0.5;
 
+var $break_mobile = 1000;
+
 function loadImages() {
 
   $articles.find('img').each(function(i) {
@@ -73,6 +75,8 @@ function scrollArchive() {
   var windowTopPad = windowMiddle - windowPadding/2*windowHeight;
   var windowBottomPad = windowMiddle + windowPadding/2*windowHeight;
 
+  var mobile = windowWidth <= $break_mobile;
+
   $articles.each(function(i) {
     var articleHeight = parseInt($(this).attr('data-height'));
     var articleTop = parseInt($(this).attr('data-top'));
@@ -95,10 +99,14 @@ function scrollArchive() {
 
     var $text = $(this).find('.text');
 
-    if (articleTop < windowTop) {
-      $text.css('position', 'fixed');
+    if (!mobile) {
+      if (articleTop < windowTop) {
+        $text.css('position', 'fixed');
+      } else {
+        $text.css('position', 'absolute');
+      }
     } else {
-      $text.css('position', 'absolute');
+      $text.css('position', '');
     }
 
   });
