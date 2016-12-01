@@ -43,11 +43,11 @@ function setScrollArchive() {
   $articles.each(function(i){
     var $post = $(this);
     var top = $post.offset().top;
-    var height = $post.outerHeight();
+    var height = $post.height();
 
-    
-    $post.find('img').css('max-height', height).css('width', 'auto');
-    $post.find('.images').css('height', height);
+    // this needs to be fixed: errors out when small window becomes large window
+    //$post.find('img').css('max-height', height).css('width', 'auto');
+    //$post.find('.images').css('height', height);
     $post.attr('data-top', top).attr('data-height', height);
     posts++;
 
