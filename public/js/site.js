@@ -7,7 +7,9 @@ var windowHeight = $(window).outerHeight();
 var windowWidth = $(window).outerWidth();
 var windowPadding = 0.5;
 
-var $break_mobile = 1000;
+var $break_mobile_1 = 1000;
+var $break_mobile_2 = 850;
+var $unit_small = 25;
 
 function loadImages() {
 
@@ -50,11 +52,13 @@ function setScrollArchive() {
     // this needs to be fixed: errors out when small window becomes large window
     //$post.find('img').css('max-height', height).css('width', 'auto');
     //$post.find('.images').css('height', height);
+    
     $post.attr('data-top', top).attr('data-height', height);
     posts++;
 
     if (posts == $articles.length){
       console.log('all posts updated :)');
+      $('#archive').addClass('loaded');
       scrollArchive();
     }
   });
@@ -75,7 +79,8 @@ function scrollArchive() {
   var windowTopPad = windowMiddle - windowPadding/2*windowHeight;
   var windowBottomPad = windowMiddle + windowPadding/2*windowHeight;
 
-  var mobile = windowWidth <= $break_mobile;
+  var mobile_1 = windowWidth <= $break_mobile_1;
+  var mobile_2 = windowWidth <= $break_mobile_2;
 
   $articles.each(function(i) {
     var articleHeight = parseInt($(this).attr('data-height'));
@@ -99,14 +104,20 @@ function scrollArchive() {
 
     var $text = $(this).find('.text');
 
-    if (!mobile) {
+    if (!mobile_1 && !mobile_2) {
       if (articleTop < windowTop) {
-        $text.css('position', 'fixed');
+        $text.addClass('stuck');
       } else {
-        $text.css('position', 'absolute');
+        $text.removeClass('stuck');
+      }
+    } else if (mobile_1 && !mobile_2) {
+      if (articleTop < windowTop+$unit_small*4) {
+        $text.addClass('stuck');
+      } else {
+        $text.removeClass('stuck');
       }
     } else {
-      $text.css('position', '');
+      $text.removeClass('stuck');
     }
 
   });

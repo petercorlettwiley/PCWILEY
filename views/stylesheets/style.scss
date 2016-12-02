@@ -5,7 +5,8 @@ $line-height: 22px;
 
 $img_min_width: 650px;
 
-$break_mobile: 1000px;
+$break_mobile_1: 1000px;
+$break_mobile_2: 850px;
 
 $unit_small: 25px;
 $unit_large: 140px;
@@ -57,6 +58,7 @@ h1#title {
   position: fixed;
   top: $unit_small;
   left: $font-size-site-title + $unit_small;
+  z-index: 3;
   transform-origin: 0 0;
   transform: rotate(90deg);
   a {
@@ -93,11 +95,19 @@ nav#nav ul a {
 */
 div#archive {
   margin: 0 $unit_small $unit_small $unit_large;
+  transition: all 0.3s;
 
   article {
     position: relative;
     margin-bottom: $unit_large;
+  }
 
+  &:not(.loaded) {
+    opacity: 0;
+    &:after {
+      content: 'loadinggggggg';
+      position: fixed;
+    }
   }
 }
 
@@ -129,6 +139,10 @@ div#archive div.text {
       border-bottom: 1px solid $color_blue;
     }
   }
+
+  &.stuck {
+    position: fixed;
+  }
 }
 
 /*
@@ -153,7 +167,7 @@ div#archive div.images {
 /* break_1 = 140px + 280px + 25px + 580px +25px*/
 /* mobile = 780 */
 @media (max-width: ($unit_large + $unit_large*2 + $unit_small + $img_min_width + $unit_small)) { // 1050px
-  div#archive article {
+  div#archive {
     text-align: right;
     div.text {
       text-align: left;
@@ -170,7 +184,7 @@ div#archive div.images {
 /*
   Mobile break
 */
-@media (max-width: $break_mobile) {
+@media (max-width: $break_mobile_1) {
   h1#title {
     transform: rotate(0);
     position: fixed;
@@ -194,20 +208,42 @@ div#archive div.images {
 
   div#archive {
     margin: 0;
-    padding: 200px $unit_small $unit_small*3;
+    padding: $unit_small*4 $unit_small $unit_small*3;
 
     article {
       margin: 0;
       width: 100%;
       max-width: 100%;
       min-width: auto;
-      background-color: blue;
+
+      &:nth-of-type(n+2) {
+        margin-top: $unit_large;
+      }
     }
 
     div.text {
-      position: static;
+      left: 0;
       display: inline-block;
       vertical-align: top;
+
+      &.stuck {
+        position: fixed;
+        top: $unit_small*4;
+        left: $unit_small;
+      }
+    }
+  }
+}
+@media (max-width: $break_mobile_2) {
+  div#archive {
+    text-align: center;
+
+    div.text {
+      position: static;
+      width: 100%;
+    }
+    div.images {
+      max-width: 100%;
     }
   }
 }
