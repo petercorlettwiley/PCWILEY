@@ -1,7 +1,28 @@
 <form role="form" action="" method="post">
-	<input type="text" name="title" value="<%= @post.title %>">
-  <textarea name="images"><%= @post.images %></textarea>
-	<textarea name="body"><%= @post.body %></textarea>
-	<input type="checkbox" value="true" name="published" <%= if @post.published then 'checked' else '' end %>>
-	<button type="submit" class="btn">update</button>
+  <table>
+    <tr>
+      <th>title</th>
+      <th>images</th>
+      <th>body</th>
+      <th>published</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>
+	      <input type="text" name="title" value="<%= @post.title %>">
+      </td>
+      <td>
+        <textarea name="images"><%= @post.images %></textarea>
+      </td>
+      <td>
+      	<textarea name="body"><%= @post.body %></textarea>
+      </td>
+      <td>
+      	<input type="checkbox" value="true" name="published" <%= if @post.published then 'checked' else '' end %>>
+      </td>
+      <td>
+      	<button type="submit" class="btn">update</button>
+      </td>
+    </tr>
+  </table>
 </form>

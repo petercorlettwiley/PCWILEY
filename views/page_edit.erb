@@ -1,13 +1,40 @@
 <form role="form" action="" method="post">
-  <input type="text" name="slug" value="<%= @page.slug %>">
-	<input type="text" name="title" value="<%= @page.title %>">
-  <textarea name="images"><%= @page.images %></textarea>
-	<textarea name="body"><%= @page.body %></textarea>
-	<input type="checkbox" value="true" name="published" <%= if @page.published then 'checked' else '' end %>>
-  <select name="type">
-    <option value="page" <%= if @page.type == 'page' then 'selected' else '' end %>>page</option>
-    <option value="home" <%= if @page.type == 'home' then 'selected' else '' end %>>home</option>
-    <option value="archive" <%= if @page.type == 'archive' then 'selected' else '' end %>>archive</option>
-  </select>
-	<button type="submit" class="btn">update</button>
+  <table>
+    <tr>
+      <th>slug</th>
+      <th>title</th>
+      <th>images</th>
+      <th>body</th>
+      <th>published</th>
+      <th>type</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" name="slug" value="<%= @page.slug %>">
+      </td>
+      <td>
+	      <input type="text" name="title" value="<%= @page.title %>">
+      </td>
+      <td>
+        <textarea name="images"><%= @page.images %></textarea>
+      </td>
+      <td>
+      	<textarea name="body"><%= @page.body %></textarea>
+      </td>
+      <td>
+      	<input type="checkbox" value="true" name="published" <%= if @page.published then 'checked' else '' end %>>
+      </td>
+      <td>
+        <select name="type">
+          <option value="page" <%= if @page.type == 'page' then 'selected' else '' end %>>page</option>
+          <option value="home" <%= if @page.type == 'home' then 'selected' else '' end %>>home</option>
+          <option value="archive" <%= if @page.type == 'archive' then 'selected' else '' end %>>archive</option>
+        </select>
+      </td>
+      <td>
+        <button type="submit" class="btn">update</button>
+      </td>
+    </tr>
+	</table>
 </form>

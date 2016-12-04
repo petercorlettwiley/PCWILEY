@@ -48,9 +48,10 @@ function setScrollArchive() {
     var $post = $(this);
     var top = $post.offset().top;
     var height = $post.height();
+    var imgHeight = Math.round($post.find('img:first-of-type').height());
 
     // this needs to be fixed: errors out when small window becomes large window
-    //$post.find('img').css('max-height', height).css('width', 'auto');
+    $post.find('img').css('max-height', imgHeight).css('width', 'auto');
     //$post.find('.images').css('height', height);
     
     $post.attr('data-top', top).attr('data-height', height);
@@ -58,7 +59,7 @@ function setScrollArchive() {
 
     if (posts == $articles.length){
       console.log('all posts updated :)');
-      $('#archive').addClass('loaded');
+      $('body').addClass('loaded');
       scrollArchive();
     }
   });

@@ -1,8 +1,18 @@
 <%= erb :header %>
 
-<%= @page.images %>
+<div id='page'>
+  <article>
 
-<div id='text'><%= @page.body %></div>
+    <div class='text'>
+      <%= @page.body %>
+    </div>
+
+    <div class='images'>
+      <%= @page.images %>
+    </div>
+
+  </article>
+</div>
 
 <%= erb :nav %>
 

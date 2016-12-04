@@ -61,10 +61,13 @@ h1#title {
   z-index: 3;
   transform-origin: 0 0;
   transform: rotate(90deg);
-  a {
+  a, a:visited, a:active {
     text-decoration: none;
     -webkit-text-stroke: 1px $color_blue;
     color: transparent;
+  }
+  a:hover {
+    color: $color_blue;
   }
 }
 
@@ -88,12 +91,15 @@ nav#nav ul a {
   &:visited, &:active {
     color: $color_blue;
   }
+  &:hover {
+    color: $color_text;
+  }
 }
 
 /*
-  Main Archive Column
+  Main Archive and Page Column
 */
-div#archive {
+div#archive, div#page {
   margin: 0 $unit_small $unit_small $unit_large;
   transition: all 0.3s;
 
@@ -101,20 +107,19 @@ div#archive {
     position: relative;
     margin-bottom: $unit_large;
   }
+}
 
-  &:not(.loaded) {
-    opacity: 0;
-    &:after {
-      content: 'loadinggggggg';
-      position: fixed;
-    }
+div#page {
+  margin-bottom: 0;
+  article {
+    margin-bottom: 0;
   }
 }
 
 /*
   Text
 */
-div#archive div.text {
+div#archive div.text, div#page div.text {
   position: absolute;
   top: 0;
   z-index: 2;
@@ -137,6 +142,9 @@ div#archive div.text {
       color: $color_text;
       text-decoration: none;
       border-bottom: 1px solid $color_blue;
+      &:hover {
+        border-bottom: none;
+      }
     }
   }
 
@@ -151,14 +159,29 @@ div#archive div.text {
 div#archive div.images {
   margin-left: $unit_large*2 + $unit_small;
   padding-top: $unit_small;
+  position: relative;
 
   img {
     max-width: 100%;
     display: block;
+
     &:nth-of-type(n+2) {
       display: none;
     }
   }
+
+  &:after {
+    content: '';
+    background-color: transparent;
+    position: absolute;
+    top: $unit_small;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    cursor: e-resize;
+  }
+
+  cursor: w-resize;
 }
 
 /*
@@ -167,7 +190,7 @@ div#archive div.images {
 /* break_1 = 140px + 280px + 25px + 580px +25px*/
 /* mobile = 780 */
 @media (max-width: ($unit_large + $unit_large*2 + $unit_small + $img_min_width + $unit_small)) { // 1050px
-  div#archive {
+  div#archive, div#page {
     text-align: right;
     div.text {
       text-align: left;
@@ -176,7 +199,7 @@ div#archive div.images {
       display: inline-block;
       margin-bottom: -5px;
       margin-left: 0;
-      max-width: $img_min_width;
+      width: $img_min_width;
     }
   }
 }
@@ -206,7 +229,7 @@ div#archive div.images {
     right: 0;
   }
 
-  div#archive {
+  div#archive, div#page {
     margin: 0;
     padding: $unit_small*4 $unit_small $unit_small*3;
 
@@ -235,7 +258,7 @@ div#archive div.images {
   }
 }
 @media (max-width: $break_mobile_2) {
-  div#archive {
+  div#archive, div#page {
     text-align: center;
 
     div.text {
@@ -244,6 +267,10 @@ div#archive div.images {
     }
     div.images {
       max-width: 100%;
+      text-align: center;
+      img {
+        display: inline-block;
+      }
     }
   }
 }
