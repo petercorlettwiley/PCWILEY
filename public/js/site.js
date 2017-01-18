@@ -9,7 +9,7 @@ var windowPadding = 0.5;
 
 var $break_mobile_1 = 1000;
 var $break_mobile_2 = 850;
-var $unit_small = 25;
+var $unit_small = 36;
 
 function loadImages() {
 
@@ -51,7 +51,7 @@ function setScrollArchive() {
     var imgHeight = Math.round($post.find('img:first-of-type').height());
 
     // this needs to be fixed: errors out when small window becomes large window
-    $post.find('img').css('max-height', imgHeight).css('width', 'auto');
+    //$post.find('img').css('max-height', imgHeight).css('width', 'auto');
     //$post.find('.images').css('height', height);
     
     $post.attr('data-top', top).attr('data-height', height);
@@ -112,7 +112,7 @@ function scrollArchive() {
         $text.removeClass('stuck');
       }
     } else if (mobile_1 && !mobile_2) {
-      if (articleTop < windowTop+$unit_small*4) {
+      if (articleTop < windowTop+$unit_small*3) {
         $text.addClass('stuck');
       } else {
         $text.removeClass('stuck');

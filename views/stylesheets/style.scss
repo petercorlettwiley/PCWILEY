@@ -8,11 +8,12 @@ $img_min_width: 650px;
 $break_mobile_1: 1000px;
 $break_mobile_2: 850px;
 
-$unit_small: 25px;
+$unit_small: 36px;
 $unit_large: 140px;
 
 $color_blue: #00c;
 $color_text: #000;
+$color_white: #fff;
 
 $transition: all 0.8s;
 
@@ -45,6 +46,18 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 /*
+  Header
+*/
+header {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: $unit_small*2.5;
+  border-right: 1px solid $color_blue;
+}
+
+/*
   Site Title
 */
 h1#title {
@@ -55,9 +68,10 @@ h1#title {
   text-transform: uppercase;
   letter-spacing: 5px;
   margin: 0;
-  position: fixed;
+  position: absolute;
   top: $unit_small;
-  left: $font-size-site-title + $unit_small;
+  left: $unit_small*2;
+  width: $font-size-site-title * 9;
   z-index: 3;
   transform-origin: 0 0;
   transform: rotate(90deg);
@@ -68,6 +82,7 @@ h1#title {
   }
   a:hover {
     color: $color_blue;
+    -webkit-text-stroke: 0;
   }
 }
 
@@ -75,24 +90,33 @@ h1#title {
   Nav
 */
 nav#nav {
-  position: fixed;
-  left: $unit_small;
+  position: absolute;
+  //left: $unit_small;
   bottom: $unit_small;
+  width: 100%;
 }
 nav#nav ul {
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 nav#nav ul li {
-  margin-top: $unit_small / 2;
+  //margin-top: $unit_small / 2;
 }
 nav#nav ul a {
   text-decoration: none;
+  font-size: $font_size * 2/3;
+  text-transform: uppercase;
+  color: $color_blue;
+  padding: 9px 0 0;
+  display: inline-block;
+  border-bottom: 1px solid $color_white;
   &:visited, &:active {
     color: $color_blue;
   }
   &:hover {
-    color: $color_text;
+    color: $color_blue;
+    border-color: $color_blue;
   }
 }
 
@@ -129,7 +153,9 @@ div#archive div.text, div#page div.text {
   h2, h3 {
     margin: 0;
     font-weight: normal;
-    font-size: $font-size;
+    font-family: 'Brush Script MT', serif;
+    font-size: $font-size*4/3;
+    letter-spacing: 2px;
     line-height: $line-height;
     text-transform: uppercase;
   }
@@ -143,6 +169,7 @@ div#archive div.text, div#page div.text {
       text-decoration: none;
       border-bottom: 1px solid $color_blue;
       &:hover {
+        color: $color_blue;
         border-bottom: none;
       }
     }
@@ -184,12 +211,23 @@ div#archive div.images {
   cursor: w-resize;
 }
 
+div#page div.images {
+  margin-left: $unit_large*2 + $unit_small;
+  padding-top: $unit_small;
+  position: relative;
+
+  canvas {
+    width: 500px !important;
+    height: 500px !important;
+  }
+}
+
 /*
   Break 1
 */
 /* break_1 = 140px + 280px + 25px + 580px +25px*/
 /* mobile = 780 */
-@media (max-width: ($unit_large + $unit_large*2 + $unit_small + $img_min_width + $unit_small)) { // 1050px
+/*@media (max-width: ($unit_large + $unit_large*2 + $unit_small + $img_min_width + $unit_small)) { // 1050px
   div#archive, div#page {
     text-align: right;
     div.text {
@@ -202,7 +240,7 @@ div#archive div.images {
       width: $img_min_width;
     }
   }
-}
+}*/
 
 /*
   Mobile break
@@ -211,19 +249,37 @@ div#archive div.images {
   h1#title {
     transform: rotate(0);
     position: fixed;
+    width: auto;
     left: 0;
     right: 0;
     text-align: center;
     font-size: 46px;
     letter-spacing: 3px;
   }
-  
+  header {
+    border: 0;
+    width: 0;
+    top: 0;
+    z-index: 10;
+  }
   nav#nav {
+    position: fixed;
+    width: auto;
+    left: $unit_small;
     right: $unit_small;
   }
   nav#nav ul li {
     position: absolute;
     bottom: 0;
+    z-index: 100;
+    a {
+      padding: 0.25em 0.5em;
+      border: 1px solid;
+      &:hover {
+        background-color: $color_blue;
+        color: $color_white;
+      }
+    }
   }
   nav#nav ul li:last-child {
     right: 0;
@@ -231,7 +287,7 @@ div#archive div.images {
 
   div#archive, div#page {
     margin: 0;
-    padding: $unit_small*4 $unit_small $unit_small*3;
+    padding: $unit_small*3 $unit_small $unit_small*3;
 
     article {
       margin: 0;
@@ -256,6 +312,10 @@ div#archive div.images {
       }
     }
   }
+  div#page div.images canvas {
+    width: 100% !important;
+    height: 450px !important;
+  }
 }
 @media (max-width: $break_mobile_2) {
   div#archive, div#page {
@@ -264,10 +324,17 @@ div#archive div.images {
     div.text {
       position: static;
       width: 100%;
+      text-align: left;
+      padding: 0 $unit_small;
+      box-sizing: border-box;
+    }
+    h2, h3 {
+      text-align: center;
     }
     div.images {
       max-width: 100%;
       text-align: center;
+      margin-left: 0;
       img {
         display: inline-block;
       }
