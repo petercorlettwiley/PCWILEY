@@ -34,6 +34,7 @@ function loadImages() {
     images++;
     if (images == $articles.find('img').length) {
       console.log('all images loaded :)');
+      removeLoader();
       setScrollArchive();
     }
   }
@@ -140,8 +141,18 @@ function shuffleImg(obj, e) {
   shuffle_next ? $first_child.appendTo($container) : $last_child.prependTo($container);
 }
 
+function removeLoader() {
+  $('#loader').fadeOut(1000, function(){
+    $('body .wrap').animate({ opacity: 1 }, 1500);
+  });
+}
+
 $(document).ready(function() {
-  loadImages();
+  if ($('body').hasClass('archive')) {
+    loadImages();
+  } else {
+    removeLoader();
+  }
 
   $('#archive article .images').click(function(e) {
     shuffleImg($(this), e);

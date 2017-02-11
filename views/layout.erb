@@ -18,8 +18,12 @@
 </head>
 
   <body id='<%= if @page then @page.slug else "admin" end %>' class='<%= if @page then @page.type end %>'>
-    <%= yield %>
+    <div id='wrap'>
+      <%= yield %>
+    </div>
   </body>
+
+  <%= erb :loader %>
 
 
   <!-- Load jQuery + ui + paper.js + bootstrap from public cdn -->

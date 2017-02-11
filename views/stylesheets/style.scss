@@ -44,6 +44,11 @@ body {
 h1, h2, h3, h4, h5, h6, strong {
   font-weight: normal;
 }
+h1, h2, h3, h4, h5, h6, p, a {
+  &::selection {
+    background: $color_blue;
+  }
+}
 
 /*
   Header
@@ -79,6 +84,7 @@ h1#title {
     text-decoration: none;
     -webkit-text-stroke: 1px $color_blue;
     color: transparent;
+    transition: color 0.3s;
   }
   a:hover {
     color: $color_blue;
@@ -111,6 +117,8 @@ nav#nav ul a {
   padding: 9px 0 0;
   display: inline-block;
   border-bottom: 1px solid $color_white;
+  transition: border 0.3s;
+  transition: background 0.3s;
   &:visited, &:active {
     color: $color_blue;
   }
@@ -168,6 +176,7 @@ div#archive div.text, div#page div.text {
       color: $color_text;
       text-decoration: none;
       border-bottom: 1px solid $color_blue;
+      transition: color 0.2s;
       &:hover {
         color: $color_blue;
         border-bottom: none;
@@ -194,6 +203,10 @@ div#archive div.images {
 
     &:nth-of-type(n+2) {
       display: none;
+    }
+
+    &::selection {
+      background: transparent;
     }
   }
 
@@ -342,6 +355,47 @@ div#page div.images {
   }
 }
 
+/*
+  Loading
+*/
+body .wrap {
+  opacity: 0;
+}
+#loader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: block;
+  background: linear-gradient(315deg, #6600cc, #00cc99);
+  background-size: 400% 400%;
+  -webkit-animation: loader_gradient 24s ease infinite;
+  -moz-animation: loader_gradient 24s ease infinite;
+  -o-animation: loader_gradient 24s ease infinite;
+  animation: loader_gradient 24s ease infinite;
+}
+@-webkit-keyframes loader_gradient {
+  0%{background-position:0% 22%}
+  50%{background-position:100% 79%}
+  100%{background-position:0% 22%}
+}
+@-moz-keyframes loader_gradient {
+  0%{background-position:0% 22%}
+  50%{background-position:100% 79%}
+  100%{background-position:0% 22%}
+}
+@-o-keyframes loader_gradient {
+  0%{background-position:0% 22%}
+  50%{background-position:100% 79%}
+  100%{background-position:0% 22%}
+}
+@keyframes loader_gradient {
+  0%{background-position:0% 22%}
+  50%{background-position:100% 79%}
+  100%{background-position:0% 22%}
+}
 /*
   Admin
 */
