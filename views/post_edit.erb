@@ -4,6 +4,7 @@
       <th>title</th>
       <th>images</th>
       <th>body</th>
+      <th>archive</th>
       <th>published</th>
       <th></th>
     </tr>
@@ -16,6 +17,9 @@
       </td>
       <td>
       	<textarea name="body"><%= @post.body %></textarea>
+      </td>
+      <td>
+        <textarea name="archive"><%= @post.archive %></textarea>
       </td>
       <td>
       	<input type="checkbox" value="true" name="published" <%= if @post.published then 'checked' else '' end %>>

@@ -25,6 +25,7 @@ class Post
   property :images, Text
   property :body, Text
   property :published, Boolean, :default => false
+  property :archive, Text, :default => 'none'
 end
 
 DataMapper.finalize
@@ -106,7 +107,7 @@ class PCWILEY < Sinatra::Base
 
   post '/admin/newpost' do
     protected!
-    newPost = Post.create(:title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published])
+    newPost = Post.create(:title => params[:title], :images => params[:images], :body => params[:body], :archive => params[:archive], :published => params[:published])
     redirect '/admin'
   end
 
@@ -118,7 +119,7 @@ class PCWILEY < Sinatra::Base
 
   post '/admin/editpost/:id' do
     protected!
-    Post.get(params[:id]).update(:title => params[:title], :images => params[:images], :body => params[:body], :published => params[:published])
+    Post.get(params[:id]).update(:title => params[:title], :images => params[:images], :body => params[:body], :archive => params[:archive], :published => params[:published])
     redirect '/admin'
   end
 
@@ -144,7 +145,7 @@ class PCWILEY < Sinatra::Base
 
     case @page.type
     when 'archive'
-      @posts = Post.all
+      @posts = Post.all(:archive => @page.slug)
       erb :archive
     when 'home'
       redirect '/'

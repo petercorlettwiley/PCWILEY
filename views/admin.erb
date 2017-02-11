@@ -78,6 +78,7 @@
       <th>title</th>
       <th>images</th>
       <th>body</th>
+      <th>archive</th>
       <th>published</th>
       <th>actions</th>
     </tr>
@@ -89,6 +90,7 @@
         <td><%= post.title %></td>
         <td><%= post.images %></td>
         <td><%= post.body %></td>
+        <td><%= post.archive %></td>
         <td><%= if post.published then 'yes' else 'no' end %></td>
         <td><a href='/admin/editpost/<%= post.id %>'>edit</a> <button onClick='deleteID("post", <%= post.id %>)'>delete</button></td>
       </tr>
