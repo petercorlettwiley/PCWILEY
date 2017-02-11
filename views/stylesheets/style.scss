@@ -59,7 +59,7 @@ header {
   bottom: 0;
   left: 0;
   width: $unit_small*2.5;
-  border-right: 1px solid $color_blue;
+  border-right: 1px solid $color_text;
 }
 
 /*
@@ -82,7 +82,7 @@ h1#title {
   transform: rotate(90deg);
   a, a:visited, a:active {
     text-decoration: none;
-    -webkit-text-stroke: 1px $color_blue;
+    -webkit-text-stroke: 1px $color_text;
     color: transparent;
     transition: color 0.3s;
   }
@@ -262,22 +262,23 @@ div#page div.images {
 @media (max-width: $break_mobile_1) {
   h1#title {
     transform: rotate(0);
-    position: fixed;
-    width: auto;
-    left: 0;
-    right: 0;
+    position: static;
+    display: block;
+    width: 100%;
     text-align: center;
     font-size: 46px;
     letter-spacing: 3px;
   }
   header {
     border: 0;
-    width: 0;
-    top: 0;
-    z-index: 10;
+    width: 100%;
+    display: block;
+    position: static;
+    margin-top: $unit_small;
   }
   nav#nav {
     position: fixed;
+    z-index: 1;
     width: auto;
     left: $unit_small;
     right: $unit_small;
@@ -289,9 +290,11 @@ div#page div.images {
     a {
       padding: 0.25em 0.5em;
       border: 1px solid;
+      transition: border-color 0.3s;
       &:hover {
-        background-color: $color_blue;
-        color: $color_white;
+        border-color: $color_text;
+        //background-color: $color_blue;
+        //color: $color_white;
       }
     }
   }
@@ -301,7 +304,7 @@ div#page div.images {
 
   div#archive, div#page {
     margin: 0;
-    padding: $unit_small*3 $unit_small $unit_small*3;
+    padding: $unit_small $unit_small $unit_small*3;
 
     article {
       margin: 0;
