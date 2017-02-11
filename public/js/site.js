@@ -130,15 +130,37 @@ function shuffleImg(obj, e) {
   var $container = obj;
 
   var offset = $container.offset();
+  var container_width = $container.outerWidth();
   var mouse_x = (e.pageX - offset.left);
-  var mid_line = $container.outerWidth()/2;
+  var mid_line = container_width/2;
 
   var shuffle_next = mouse_x > mid_line;
 
   var $first_child = $container.children().first();
   var $last_child = $container.children().last();
 
-  shuffle_next ? $first_child.appendTo($container) : $last_child.prependTo($container);
+  /*$first_child.fadeOut(300, function(){
+    shuffle_next ? (
+      $first_child.appendTo($container)
+    ) : (
+      $last_child.prependTo($container)
+    );
+    $(this).css('display', '');
+  });*/
+
+  if (shuffle_next) {
+    $first_child.animate({ left: container_width*-0.5, opacity: 0 }, 200, 'linear', function(){
+      $first_child.css('left', '').css('opacity', '').appendTo($container);
+      $container.children().first().hide().fadeIn(200);
+    });
+  } else {
+    $first_child.animate({ left: container_width*0.5, opacity: 0 }, 200, 'linear', function(){
+      $first_child.css('left', '').css('opacity', '');
+      $last_child.prependTo($container);
+      $container.children().first().hide().fadeIn(200);
+    });
+
+  }
 }
 
 function removeLoader() {

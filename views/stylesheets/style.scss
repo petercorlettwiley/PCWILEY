@@ -200,6 +200,7 @@ div#archive div.images {
   img {
     max-width: 100%;
     display: block;
+    position: relative;
 
     &:nth-of-type(n+2) {
       display: none;
