@@ -34,7 +34,7 @@ $font_path: 'http://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: $font, sans-serif;
   font-size: $font-size;
   font-weight: normal;
   line-height: $line-height;
@@ -161,9 +161,9 @@ div#archive div.text, div#page div.text {
   h2, h3 {
     margin: 0;
     font-weight: normal;
-    font-family: 'Brush Script MT', serif;
-    font-size: $font-size*4/3;
-    letter-spacing: 2px;
+    font-family: $font, serif;
+    font-size: $font-size;
+    letter-spacing: 1px;
     line-height: $line-height;
     text-transform: uppercase;
   }
@@ -199,8 +199,10 @@ div#archive div.images {
 
   img {
     max-width: 100%;
+    width: 100%;
     display: block;
     position: relative;
+    //cursor: w-resize;
 
     &:nth-of-type(n+2) {
       display: none;
@@ -211,7 +213,7 @@ div#archive div.images {
     }
   }
 
-  &:after {
+  &:before {
     content: '';
     background-color: transparent;
     position: absolute;
@@ -219,10 +221,11 @@ div#archive div.images {
     right: 0;
     bottom: 0;
     left: 50%;
-    cursor: e-resize;
+    z-index: 1000;
+    //cursor: e-resize;
   }
 
-  cursor: w-resize;
+  
 }
 
 div#page div.images {
