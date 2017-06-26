@@ -148,19 +148,19 @@ function shuffleImg(obj, e) {
     $(this).css('display', '');
   });*/
 
-  if (shuffle_next) {
+  //if (shuffle_next) {
     $first_child.animate({ left: container_width*-0.5, opacity: 0 }, 200, 'linear', function(){
       $first_child.css('left', '').css('opacity', '').appendTo($container);
       $container.children().first().hide().fadeIn(200);
     });
-  } else {
+  /*} else {
     $first_child.animate({ left: container_width*0.5, opacity: 0 }, 200, 'linear', function(){
       $first_child.css('left', '').css('opacity', '');
       $last_child.prependTo($container);
       $container.children().first().hide().fadeIn(200);
     });
 
-  }
+  }*/
 }
 
 function removeLoader() {
