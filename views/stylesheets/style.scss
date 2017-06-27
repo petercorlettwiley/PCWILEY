@@ -124,15 +124,15 @@ nav#nav ul a {
   display: inline-block;
   border-bottom: 2px solid $color_blue;
   transition: border 0.3s;
-  transition: background 0.3s;
+  transition: color 0.2s;
 
-  &:visited, &:active {
+  &, &:visited, &:active {
     color: $color_text;
   }
 
   &:hover {
-    color: $color_blue;
-    border-color: $color_blue;
+    color: transparent;
+    -webkit-text-stroke: 1px $color_text;
   }
 }
 
@@ -184,14 +184,16 @@ div#archive div.text, div#page div.text {
     font-size: $font-size;
     line-height: $line-height;
     margin: $line-height 0;
+
     a, a:visited, a:active {
       color: $color_text;
       text-decoration: none;
       border-bottom: 2px solid $color_blue;
       transition: color 0.2s;
+
       &:hover {
-        color: $color_blue;
-        border-bottom: none;
+        color: transparent;
+        -webkit-text-stroke: 1px $color_text;
       }
     }
   }
@@ -250,6 +252,23 @@ div#page div.images {
     //width: 500px !important;
     //height: 500px !important;
     //cursor: crosshair;
+  }
+}
+
+#home div#page div.images {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  z-index: -2;
+
+  canvas {
+    width: 100%;
+    height: 100%;
   }
 }
 
