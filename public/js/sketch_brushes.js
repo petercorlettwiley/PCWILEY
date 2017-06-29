@@ -99,10 +99,17 @@ var setupIndex = 0;
 // COLOR SCHEMES
 var colors = [
   // bg, brush, mouse
-  ["#006eb8", "#b59392", "#e2b53f"],
-  ["#63c6bf", "#263122", "#f9ed43"],
-  ["#66629c", "#b6bfc1", "#f38094"],
-  ["#fbe6a0", "#f48067", "#456e6b"]
+  ["#fff", "#c55347", "#bce4e5"],
+  ["#fff", "#00978c", "#f58e84"],
+  ["#fff", "#121315", "#fff200"],
+  ["#fff", "#40456a", "#f99d1c"],
+  ["#fff", "#006eb8", "#fdd4bd"]
+
+  // old 3 color brushes
+  //["#006eb8", "#b59392", "#e2b53f"],
+  //["#63c6bf", "#263122", "#f9ed43"],
+  //["#66629c", "#b6bfc1", "#f38094"],
+  //["#fbe6a0", "#f48067", "#456e6b"]
 ];
 
 // SPEEDS + SIZES

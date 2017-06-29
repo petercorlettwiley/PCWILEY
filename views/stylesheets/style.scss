@@ -185,6 +185,10 @@ div#archive div.text, div#page div.text {
     line-height: $line-height;
     margin: $line-height 0;
 
+    &:first-child {
+      margin-top: 0;
+    }
+
     a, a:visited, a:active {
       color: $color_text;
       text-decoration: none;
@@ -211,6 +215,7 @@ div#archive div.images {
   margin-right: $unit_large*2 + $unit_small;
   padding-top: $unit_small;
   position: relative;
+  overflow: hidden;
 
   img {
     max-width: 100%;
@@ -227,32 +232,12 @@ div#archive div.images {
       background: transparent;
     }
   }
-
-  /*&:before {
-    content: '';
-    background-color: transparent;
-    position: absolute;
-    top: $unit_small;
-    right: 0;
-    bottom: 0;
-    left: 50%;
-    z-index: 1000;
-    //cursor: e-resize;
-  }*/
-
-  
 }
 
 div#page div.images {
   margin-left: $unit_large*2 + $unit_small;
   padding-top: $unit_small;
   position: relative;
-
-  canvas {
-    //width: 500px !important;
-    //height: 500px !important;
-    //cursor: crosshair;
-  }
 }
 
 #home div#page div.images {

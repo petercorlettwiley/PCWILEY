@@ -149,10 +149,14 @@ function shuffleImg(obj, e) {
   });*/
 
   //if (shuffle_next) {
-    $first_child.animate({ left: container_width*-0.5, opacity: 0 }, 200, 'linear', function(){
+    $first_child.animate({ left: container_width*-1 }, 200, 'linear', function(){
+      $first_child.css('left', '').appendTo($container);
+      $container.children().first().hide().fadeIn(300);
+    });
+    /*$first_child.animate({ left: container_width*-0.5, opacity: 0 }, 200, 'linear', function(){
       $first_child.css('left', '').css('opacity', '').appendTo($container);
       $container.children().first().hide().fadeIn(200);
-    });
+    });*/
   /*} else {
     $first_child.animate({ left: container_width*0.5, opacity: 0 }, 200, 'linear', function(){
       $first_child.css('left', '').css('opacity', '');
