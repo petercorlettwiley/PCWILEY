@@ -285,10 +285,17 @@ div#page div.images {
   Mobile break
 */
 @media (max-width: $break_mobile) {
+<<<<<<< HEAD
   body {
     font-size: $font-size-mobile;
     line-height: $line-height-mobile;
   }
+=======
+	body {
+		font-size: $font-size-mobile;
+		line-height: $line-height-mobile;
+	}
+>>>>>>> 3329a6daf0fe9e74d9585272d414996d3f08e00f
 
   h1#title {
     transform: rotate(0);
@@ -360,6 +367,7 @@ div#page div.images {
       max-width: $unit_large*5;
 
       p {
+<<<<<<< HEAD
         font-size: $font-size-mobile;
         line-height: $line-height-mobile;
       }
@@ -368,11 +376,27 @@ div#page div.images {
         text-align: center;
         font-size: $font-size-mobile;
         line-height: $line-height-mobile;
+=======
+      	font-size: $font-size-mobile;
+      	line-height: $line-height-mobile;
+>>>>>>> 3329a6daf0fe9e74d9585272d414996d3f08e00f
       }
+
+      h2 {
+  			text-align: center;
+  			font-size: $font-size-mobile;
+    		line-height: $line-height-mobile;
+  		}
     }
+    div.images {
+    	margin: 0;
+    }
+<<<<<<< HEAD
     div.images {
       margin: 0;
     }
+=======
+>>>>>>> 3329a6daf0fe9e74d9585272d414996d3f08e00f
   }
 }
 /*@media (max-width: $break_mobile_2) {
