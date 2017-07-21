@@ -7,8 +7,7 @@ var windowHeight = $(window).outerHeight();
 var windowWidth = $(window).outerWidth();
 var windowPadding = 0.5;
 
-var $break_mobile_1 = 1000;
-var $break_mobile_2 = 850;
+var $break_mobile = 940;
 var $unit_small = 18;
 
 function loadImages() {
@@ -81,17 +80,16 @@ function scrollArchive() {
   var windowTopPad = windowMiddle - windowPadding/2*windowHeight;
   var windowBottomPad = windowMiddle + windowPadding/2*windowHeight;
 
-  var mobile_1 = windowWidth <= $break_mobile_1;
-  var mobile_2 = windowWidth <= $break_mobile_2;
+  var mobile = windowWidth <= $break_mobile;
 
   $articles.each(function(i) {
     var articleHeight = parseInt($(this).attr('data-height'));
     var articleTop = parseInt($(this).attr('data-top'));
     var articleBottom = articleTop + articleHeight;
     var articleMiddle = articleTop + articleHeight/2;
+    var opacity;
 
     if (articleTop < windowBottom && articleBottom > windowTop) {
-      var opacity;
       if (articleMiddle < windowTopPad) {
         opacity = 1 - Math.abs(articleMiddle - windowTopPad)/(windowPadding*windowHeight);
       } else if(articleMiddle > windowBottomPad) {
@@ -106,14 +104,8 @@ function scrollArchive() {
 
     var $text = $(this).find('.text');
 
-    if (!mobile_1 && !mobile_2) {
+    if (!mobile) {
       if (articleTop < windowTop) {
-        $text.addClass('stuck');
-      } else {
-        $text.removeClass('stuck');
-      }
-    } else if (mobile_1 && !mobile_2) {
-      if (articleTop < windowTop+$unit_small*3) {
         $text.addClass('stuck');
       } else {
         $text.removeClass('stuck');
@@ -184,11 +176,22 @@ function siteTitleAdjust() {
     $titleLeftPadding = Math.ceil($titleFontSize - (5/88 * ($titleFontSize-79)));
   }
 
-  $('#title').css('font-size', $titleFontSize)
-             .css('width', $headerHeight+10)
-             .css('left', $titleLeftPadding);
+  var mobile = windowWidth <= $break_mobile;
 
-  $('#archive').css('margin-left', Math.abs($titleLeftPadding+$unit_small*2.5));
+  if (!mobile) {
+    $('#title').css('font-size', $titleFontSize)
+               .css('width', $headerHeight+10)
+               .css('left', $titleLeftPadding);
+  
+    $('#archive').css('margin-left', Math.abs($titleLeftPadding+$unit_small*2.5));
+
+  } else {
+    $('#title').css('font-size', '')
+               .css('width', '')
+               .css('left', '');
+
+    $('#archive').css('margin-left', '');
+  }
 }
 
 function siteNavAdjust() {
