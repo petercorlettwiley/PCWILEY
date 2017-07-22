@@ -161,6 +161,10 @@ div#page {
   }
 }
 
+#software div#archive article, #music div#archive article {
+  margin-bottom: $unit_large*1.5;
+}
+
 /*
   Text
 */
@@ -262,26 +266,6 @@ div#page div.images {
 }
 
 /*
-  Break 1
-*/
-/* break_1 = 140px + 280px + 25px + 580px +25px*/
-/* mobile = 780 */
-/*@media (max-width: ($unit_large + $unit_large*2 + $unit_small + $img_min_width + $unit_small)) { // 1050px
-  div#archive, div#page {
-    text-align: right;
-    div.text {
-      text-align: left;
-    }
-    div.images {
-      display: inline-block;
-      margin-bottom: -5px;
-      margin-left: 0;
-      width: $img_min_width;
-    }
-  }
-}*/
-
-/*
   Mobile break
 */
 @media (max-width: $break_mobile) {
@@ -375,30 +359,6 @@ div#page div.images {
     }
   }
 }
-/*@media (max-width: $break_mobile_2) {
-  div#archive, div#page {
-    text-align: center;
-
-    div.text {
-      position: static;
-      width: 100%;
-      text-align: left;
-      padding: 0 $unit_small;
-      box-sizing: border-box;
-    }
-    h2, h3 {
-      text-align: center;
-    }
-    div.images {
-      max-width: 100%;
-      text-align: center;
-      margin-left: 0;
-      img {
-        display: inline-block;
-      }
-    }
-  }
-}*/
 
 /*
   Loading
