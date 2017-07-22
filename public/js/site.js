@@ -211,6 +211,9 @@ $(document).ready(function() {
 
   siteTitleAdjust();
   siteNavAdjust();
+  setTimeout(function(){ setScrollArchive()}, 3000);
+  setTimeout(function(){ setScrollArchive()}, 5000);
+  setTimeout(function(){ setScrollArchive()}, 10000);
 });
 
 $(window).resize(function() {
