@@ -24,9 +24,16 @@
   </body>
 
 
-  <!-- Load jQuery + ui + paper.js + bootstrap from public cdn -->
+  <!-- Load jQuery + paper.js + fluidvids -->
   <script type="text/javascript" src="/js/lib/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/js/lib/fluidvids.min.js"></script>
   <script type="text/javascript" src="/js/site.js"></script>
+  <script type="text/javascript">
+    fluidvids.init({
+      selector: ['iframe', 'object'], // runs querySelectorAll()
+      players: ['player.vimeo.com'] // players to support
+    });
+  </script>
 
   <!--script src="/js/main.js"></script>
   <script src="/js/ga.js"></script -->

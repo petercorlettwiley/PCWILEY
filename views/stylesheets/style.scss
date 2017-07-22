@@ -224,13 +224,18 @@ div#archive div.images {
   padding-top: $unit_small;
   position: relative;
   overflow: hidden;
-  cursor: e-resize;
 
   img {
     max-width: 100%;
     width: 100%;
     display: block;
     position: relative;
+    cursor: e-resize;
+
+    &:last-child:first-child{
+      cursor: initial;
+    }
+
 
     &:nth-of-type(n+2) {
       display: none;
