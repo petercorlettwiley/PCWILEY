@@ -208,7 +208,9 @@ function siteNavAdjust() {
 }
 
 function setMobileNav(){
-  $('#mobile-nav-toggle').click(function() {
+  $('#mobile-nav-toggle').click(function(e) {
+    e.preventDefault();
+    
     $('nav#nav ul').slideToggle('slow');
     $(this).toggleClass('open');
 
