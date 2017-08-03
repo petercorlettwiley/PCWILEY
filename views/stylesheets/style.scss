@@ -350,7 +350,7 @@ div#page div.images {
     color: transparent;
     text-decoration: none;
 
-    &:after {
+    &:after, &:before {
       content: '';
       display: block;
       width: 30px;
@@ -361,8 +361,15 @@ div#page div.images {
       background: url('//s3.amazonaws.com/pcwiley-static/img/menu_closed.svg') no-repeat 50%;
       background-size: cover;
     }
-    &.open:after {
+    &:before {
       background-image: url('//s3.amazonaws.com/pcwiley-static/img/menu_open.svg');
+      opacity: 0;
+    }
+    &.open:after {
+      opacity: 0;
+    }
+    &.open:before {
+      opacity: 1;
     }
   }
 
