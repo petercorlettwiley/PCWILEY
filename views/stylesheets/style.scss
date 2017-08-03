@@ -333,12 +333,12 @@ div#page div.images {
   nav#nav ul li {
     width: 100%;
     text-align: left !important;
-    &:last-child {
-      border-bottom: 0;
-    }
     box-sizing: border-box;
     background-color: $color_white;
-    border-bottom: 1px solid $color_blue;
+    
+    &:nth-of-type(-n + 2) {
+      border-bottom: 1px solid $color_blue;
+    }
     a {
       border: 0;
       width: 100%;
