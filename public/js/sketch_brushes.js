@@ -115,9 +115,9 @@ var colors = [
 // SPEEDS + SIZES
 var setup = [
   // pp speed, pp interval, pp width, mouse width
-  [30, 300, 10, 8],
-  [15, 100, 2, 20],
-  [50, 400, 20, 4]
+  [10, 400, 10, 8],
+  [5, 800, 2, 20],
+  [8, 700, 20, 4]
 ];
 
 // RESET FUNCTION
