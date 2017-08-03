@@ -23,6 +23,7 @@ $color_gradient_2: #00c;//#00cc99;
 
 $loader_size: 72px;
 $loader_size_mobile: 40px;
+$loader_speed: 8s;
 
 $transition: all 0.8s;
 
@@ -498,10 +499,10 @@ body .wrap {
     top: calc(50% - #{$loader_size}/2);
     background: linear-gradient(315deg, $color_gradient_1, $color_gradient_2);
     background-size: 400% 400%;
-    -webkit-animation: loader_gradient 24s ease infinite;
-    -moz-animation: loader_gradient 24s ease infinite;
-    -o-animation: loader_gradient 24s ease infinite;
-    animation: loader_gradient 24s ease infinite;
+    -webkit-animation: loader_gradient $loader_speed ease infinite;
+    -moz-animation: loader_gradient $loader_speed ease infinite;
+    -o-animation: loader_gradient $loader_speed ease infinite;
+    animation: loader_gradient $loader_speed ease infinite;
   }
 }
 @-webkit-keyframes loader_gradient {
