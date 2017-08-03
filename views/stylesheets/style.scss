@@ -19,12 +19,15 @@ $color_text: #000;
 $color_white: #fff;
 
 $color_gradient_1: #fff;//#6600cc;
-$color_gradient_2: #000;//#00cc99;
+$color_gradient_2: #00c;//#00cc99;
+
+$loader_size: 72px;
+$loader_size_mobile: 40px;
 
 $transition: all 0.8s;
 
 $font: 'MariaPro';
-$font_path: 'http://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
+$font_path: '//s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
 
 @font-face {
   font-family: $font;
@@ -460,6 +463,13 @@ div#page div.images {
     width: 24px;
     height: 24px;
   }
+
+  #loader:after {
+    width: $loader_size_mobile;
+    height: $loader_size_mobile;
+    left: calc(50% - #{$loader_size_mobile}/2);
+    top: calc(50% - #{$loader_size_mobile}/2);
+  }
 }
 
 /*
@@ -476,12 +486,23 @@ body .wrap {
   right: 0;
   z-index: 99;
   display: block;
-  background: linear-gradient(315deg, $color_gradient_1, $color_gradient_2);
-  background-size: 400% 400%;
-  -webkit-animation: loader_gradient 24s ease infinite;
-  -moz-animation: loader_gradient 24s ease infinite;
-  -o-animation: loader_gradient 24s ease infinite;
-  animation: loader_gradient 24s ease infinite;
+  background-color: $color_white;
+  &:after {
+    content: '';
+    display: block;
+    width: $loader_size;
+    height: $loader_size;
+    position: absolute;
+    display: block;
+    left: calc(50% - #{$loader_size}/2);
+    top: calc(50% - #{$loader_size}/2);
+    background: linear-gradient(315deg, $color_gradient_1, $color_gradient_2);
+    background-size: 400% 400%;
+    -webkit-animation: loader_gradient 24s ease infinite;
+    -moz-animation: loader_gradient 24s ease infinite;
+    -o-animation: loader_gradient 24s ease infinite;
+    animation: loader_gradient 24s ease infinite;
+  }
 }
 @-webkit-keyframes loader_gradient {
   0%{background-position:0% 22%}
