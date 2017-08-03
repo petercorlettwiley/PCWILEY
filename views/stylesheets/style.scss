@@ -463,7 +463,7 @@ div#page div.images {
     line-height: $line-height-mobile;
   }
 
-  #mobile-nav-toggle:after {
+  #mobile-nav-toggle:after, #mobile-nav-toggle:before {
     width: 24px;
     height: 24px;
   }
