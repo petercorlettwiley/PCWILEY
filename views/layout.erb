@@ -15,6 +15,11 @@
 
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
+  <meta property="og:url" content="http://www.pcwiley.net/<%= if @page and @page.type != 'home' then @page.slug end %>" />
+  <meta property="og:title" content="Peter C Wiley<%= if @page and @page.type != 'home' then ' | '+@page.title end %>" />
+  <meta property="og:description" content="Peter Wiley is a multi-disciplinary designer, developer, artist, and musician living in Brooklyn, NY." />
+  <meta property="og:image" content="https://s3.amazonaws.com/pcwiley-static/img/social-card_00.png" />
+
 </head>
 
   <body id='<%= if @page then @page.slug else "admin" end %>' class='<%= if @page then @page.type end %>'>
