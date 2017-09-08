@@ -28,7 +28,7 @@ $loader_speed: 8s;
 $transition: all 0.8s;
 
 $font: 'MariaPro';
-$font_path: 'http://s3.amazonaws.com/pcwiley-static/fonts/MariaPro/MariaPro';
+$font_path: '/fonts/MariaPro';
 
 @font-face {
   font-family: $font;
