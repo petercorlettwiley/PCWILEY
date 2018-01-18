@@ -23,7 +23,7 @@ $color_gradient_2: #00c;//#00cc99;
 
 $loader_size: 72px;
 $loader_size_mobile: 40px;
-$loader_speed: 8s;
+$loader_speed: 4s;
 
 $transition: all 0.8s;
 
@@ -491,6 +491,7 @@ body .wrap {
   z-index: 99;
   display: block;
   background-color: $color_white;
+  cursor: wait;
   &:after {
     content: '';
     display: block;
